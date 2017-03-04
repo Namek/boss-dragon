@@ -37,8 +37,8 @@ class TextureRenderer(world: World, private val batch: SpriteBatch) : EntityProc
 
         val x = transform.currentPos.x + transform.displacement.x
         val y = transform.currentPos.y + transform.displacement.y
-        val originX = 0f
-        val originY = 0f
+        val originX = size.origin.x * size.width
+        val originY = size.origin.y * size.height
         val scaleX = 1f
         val scaleY = 1f
 

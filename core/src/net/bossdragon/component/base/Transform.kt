@@ -11,13 +11,13 @@ class Transform : PooledComponent() {
     }
 
     /** Position set before collision detection. */
-    val desiredPos = Vector2(0f, 0f)
+    val desiredPos = Vector2()
 
     /** Finally accepted position, result of collision checks and physical forces. */
-    val currentPos = Vector2(0f, 0f)
+    val currentPos = Vector2()
 
     /** Additional displacement to position. Usually used for graphics puroses, like head bobbing. */
-    val displacement = Vector2(0f, 0f)
+    val displacement = Vector2()
 
     /** radians */
     var rotation = 0f

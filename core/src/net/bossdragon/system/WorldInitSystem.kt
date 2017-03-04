@@ -2,7 +2,7 @@ package net.bossdragon.system
 
 
 import net.bossdragon.system.base.collision.CollisionDetectionSystem
-import net.bossdragon.enums.CollisionGroups.*
+import net.bossdragon.enums.CollisionGroups as CG
 
 import com.artemis.BaseSystem
 import com.artemis.annotations.Wire
@@ -22,15 +22,16 @@ class WorldInitSystem : BaseSystem() {
     internal fun _initialize() {
         setCollisionRelations()
 
+        factorySystem.createTestBg()
         factorySystem.createPlayer()
     }
 
     internal fun setCollisionRelations() {
         val relations = world.getSystem(CollisionDetectionSystem::class.java).relations
-        relations.connectGroups(PLAYER, ENEMY)
-        relations.connectGroups(BURNING_AREA, PLAYER or ENEMY)
-        relations.connectGroups(FIREBALL, PLAYER or ENEMY)
-        relations.connectGroups(BULLET, DRAGON)
+        relations.connectGroups(CG.PLAYER, CG.ENEMY)
+        relations.connectGroups(CG.BURNING_AREA, CG.PLAYER or CG.ENEMY)
+        relations.connectGroups(CG.FIREBALL, CG.PLAYER or CG.ENEMY)
+        relations.connectGroups(CG.BULLET, CG.DRAGON)
     }
 
     override fun processSystem() {

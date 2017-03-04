@@ -6,6 +6,7 @@ class Renderable : PooledComponent() {
     companion object {
         const val NONE = 0
         const val TEXTURE = 2
+        const val ANIM = 4
     }
 
     /**

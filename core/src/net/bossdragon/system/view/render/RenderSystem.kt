@@ -13,6 +13,7 @@ import net.bossdragon.component.base.Size
 import net.bossdragon.component.base.Transform
 import net.bossdragon.component.render.Renderable
 import net.bossdragon.enums.Tags
+import net.bossdragon.system.view.render.renderers.KeyFrameAnimRenderer
 import net.bossdragon.system.view.render.renderers.TextureRenderer
 
 /**
@@ -35,6 +36,7 @@ class RenderSystem : RenderBatchingSystem() {
     lateinit var camera: OrthographicCamera
     lateinit internal var spriteBatch: SpriteBatch
     lateinit internal var textureRenderer: TextureRenderer
+    lateinit internal var keyFrameAnimRenderer: KeyFrameAnimRenderer
 
 
     override fun initialize() {
@@ -49,11 +51,13 @@ class RenderSystem : RenderBatchingSystem() {
 
         spriteBatch = SpriteBatch()
         textureRenderer = TextureRenderer(world, spriteBatch)
+        keyFrameAnimRenderer = KeyFrameAnimRenderer(world, spriteBatch)
     }
 
     override fun getRendererByType(type: Int): RenderBatchingSystem.EntityProcessAgent {
         when (type) {
             Renderable.TEXTURE -> return textureRenderer
+            Renderable.ANIM -> return keyFrameAnimRenderer
             else -> throw RuntimeException("Getting unknown renderer type: " + type)
         }
     }

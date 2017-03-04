@@ -3,11 +3,13 @@ package net.bossdragon.screen
 import com.artemis.World
 import com.artemis.WorldConfigurationBuilder
 import com.artemis.managers.TagManager
+import net.bossdragon.system.AssetSystem
 import net.bossdragon.system.EntityFactorySystem
 import net.bossdragon.system.InputSystem
 
 import net.bossdragon.system.WorldInitSystem
 import net.bossdragon.system.base.PositionSystem
+import net.bossdragon.system.base.TimeProgressingSystem
 import net.bossdragon.system.base.collision.CollisionDetectionSystem
 import net.bossdragon.system.base.events.EventSystem
 import net.bossdragon.system.view.render.DeferredRendererSetSystem
@@ -23,11 +25,13 @@ class GameScreen : WorldScreen() {
 
         return World(WorldConfigurationBuilder()
             .with(
+                AssetSystem(),
                 EntityFactorySystem(),
                 WorldInitSystem()
             )
             .with(
                 EventSystem(),
+                TimeProgressingSystem(),
                 PositionSystem(),
                 CollisionDetectionSystem(),
                 RenderSystem(),
