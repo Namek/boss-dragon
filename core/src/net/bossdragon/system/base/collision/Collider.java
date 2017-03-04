@@ -3,6 +3,7 @@ package net.bossdragon.system.base.collision;
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener;
 
 import com.artemis.PooledComponent;
+import net.bossdragon.system.base.collision.messaging.CollisionExitListener;
 
 /**
  * Collider describes parameters for collision tests of certain entity. 
@@ -19,7 +20,7 @@ public class Collider extends PooledComponent {
 
 
 	public CollisionEnterListener enterListener;
-	public net.bossdragon.system.base.collision.messaging.CollisionExitListener exitListener;
+	public CollisionExitListener exitListener;
 	
 	
 	public Collider setup(long groups, int colliderType) {

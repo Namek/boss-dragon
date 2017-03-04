@@ -20,18 +20,8 @@ class WorldInitSystem : BaseSystem() {
 
 
     internal fun _initialize() {
-        setCollisionRelations()
-
         factorySystem.createTestBg()
         factorySystem.createPlayer()
-    }
-
-    internal fun setCollisionRelations() {
-        val relations = world.getSystem(CollisionDetectionSystem::class.java).relations
-        relations.connectGroups(CG.PLAYER, CG.ENEMY)
-        relations.connectGroups(CG.BURNING_AREA, CG.PLAYER or CG.ENEMY)
-        relations.connectGroups(CG.FIREBALL, CG.PLAYER or CG.ENEMY)
-        relations.connectGroups(CG.BULLET, CG.DRAGON)
     }
 
     override fun processSystem() {

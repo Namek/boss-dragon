@@ -3,11 +3,9 @@ package net.bossdragon.screen
 import com.artemis.World
 import com.artemis.WorldConfigurationBuilder
 import com.artemis.managers.TagManager
-import net.bossdragon.system.AssetSystem
-import net.bossdragon.system.EntityFactorySystem
-import net.bossdragon.system.InputSystem
+import net.bossdragon.system.*
+import net.bossdragon.system.base.MovementSystem
 
-import net.bossdragon.system.WorldInitSystem
 import net.bossdragon.system.base.PositionSystem
 import net.bossdragon.system.base.TimeProgressingSystem
 import net.bossdragon.system.base.collision.CollisionDetectionSystem
@@ -30,14 +28,16 @@ class GameScreen : WorldScreen() {
                 WorldInitSystem()
             )
             .with(
+                InputSystem(),
+                PlayerStateSystem(),
                 EventSystem(),
                 TimeProgressingSystem(),
                 PositionSystem(),
-                CollisionDetectionSystem(),
+                CollisionSystem(),
+                MovementSystem(),
                 RenderSystem(),
                 DeferredRendererSetSystem(),
-                TopDownEntityDebugSystem(),
-                InputSystem()
+                TopDownEntityDebugSystem()
             )
             .with(
                 TagManager()

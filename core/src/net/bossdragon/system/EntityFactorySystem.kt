@@ -16,8 +16,10 @@ import net.bossdragon.component.base.Transform
 import net.bossdragon.component.render.Renderable
 import net.bossdragon.component.render.TextureComponent
 import net.bossdragon.component.base.Progressing
+import net.bossdragon.component.base.Velocity
 import net.bossdragon.component.render.anim.KeyFrameAnimations
 import net.bossdragon.enums.Assets
+import net.bossdragon.enums.C
 import net.bossdragon.enums.CollisionGroups
 import net.bossdragon.enums.Tags
 import net.bossdragon.system.base.collision.Collider
@@ -91,8 +93,12 @@ class EntityFactorySystem : PassiveSystem() {
 
         e.create(Renderable::class.java)
             .type(Renderable.TEXTURE)
+
         e.create(TextureComponent::class.java)
             .texture = TextureRegion(Texture("graphics/ceiling.jpg"))
+
+        e.create(Collider::class.java)
+            .groups(CollisionGroups.WALL)
 
         return entity
     }
@@ -104,6 +110,7 @@ class EntityFactorySystem : PassiveSystem() {
         tags.register(Tags.Player, entity)
 
         e.create(Transform::class.java)
+
         val size = e.create(Size::class.java)
             .set(Assets.StickMan.Width.toFloat(), Assets.StickMan.Height.toFloat())
             .origin(0.5f, 0f)
@@ -118,6 +125,10 @@ class EntityFactorySystem : PassiveSystem() {
         e.create(Player::class.java)
         e.create(Collider::class.java)
             .groups = CollisionGroups.PLAYER
+
+        e.create(Velocity::class.java)
+            .maxSpeed(C.Player.MaxSpeed)
+            .friction(C.Player.Friction)
 
 
         return entity

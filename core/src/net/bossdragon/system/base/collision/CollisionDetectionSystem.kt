@@ -1,18 +1,17 @@
 package net.bossdragon.system.base.collision
 
-import java.util.TreeMap
-
-import com.badlogic.gdx.math.*
-import net.bossdragon.component.base.Size
-import net.bossdragon.component.base.Transform
-
 import com.artemis.Aspect
 import com.artemis.ComponentMapper
 import com.artemis.Entity
 import com.artemis.EntitySystem
 import com.artemis.annotations.Wire
 import com.artemis.utils.IntBag
-import com.badlogic.gdx.math.collision.BoundingBox
+import com.badlogic.gdx.math.Rectangle
+import net.bossdragon.component.base.Size
+import net.bossdragon.component.base.Transform
+import net.bossdragon.system.base.collision.messaging.CollisionEvent
+import net.bossdragon.system.base.events.EventSystem
+import java.util.*
 
 /**
  * Collision detector working on top of groups and group relations.
@@ -22,19 +21,27 @@ import com.badlogic.gdx.math.collision.BoundingBox
  * @todo optimize by caching entities belongingness to groups, see [.processEntities] comment.
  */
 @Wire
-class CollisionDetectionSystem @JvmOverloads constructor(
+open class CollisionDetectionSystem @JvmOverloads constructor(
     val relations: CollisionGroupsRelations = CollisionGroupsRelations(),
     var eventDispatchingEnabled: Boolean = false
-) : EntitySystem(Aspect.all(Collider::class.java, Transform::class.java, Size::class.java)) {
+) : EntitySystem(
+    Aspect.all(
+        Collider::class.java,
+        Transform::class.java,
+        Size::class.java
+    )
+) {
 
-    protected var mCollider: ComponentMapper<Collider>? = null
-    protected var mTransform: ComponentMapper<Transform>? = null
-    protected var mDimensions: ComponentMapper<Size>? = null
+    lateinit protected var mCollider: ComponentMapper<Collider>
+    lateinit protected var mTransform: ComponentMapper<Transform>
+    lateinit protected var mSize: ComponentMapper<Size>
 
-    protected var events: net.bossdragon.system.base.events.EventSystem? = null
+    protected var events: EventSystem? = null
+
     private val phases = CollisionPhases()
     private val rect1 = Rectangle()
     private val rect2 = Rectangle()
+
 
     constructor(eventDispatchingEnabled: Boolean) : this(CollisionGroupsRelations(), eventDispatchingEnabled) {}
 
@@ -55,11 +62,11 @@ class CollisionDetectionSystem @JvmOverloads constructor(
         val n = entities.size()
         while (i < n) {
             val entity1Id = ids[i]
-            val collider1 = mCollider!!.get(entity1Id)
+            val collider1 = mCollider.get(entity1Id)
 
             for (j in i + 1..n - 1) {
                 val entity2Id = ids[j]
-                val collider2 = mCollider!!.get(entity2Id)
+                val collider2 = mCollider.get(entity2Id)
 
                 val phase = phases[entity1Id, entity2Id]
 
@@ -94,10 +101,10 @@ class CollisionDetectionSystem @JvmOverloads constructor(
     }
 
     fun checkOverlap(entity1Id: Int, collider1: Collider, entity2Id: Int, collider2: Collider): Boolean {
-        val trans1 = mTransform!!.get(entity1Id)
-        val trans2 = mTransform!!.get(entity2Id)
-        val size1 = mDimensions!!.get(entity1Id)
-        val size2 = mDimensions!!.get(entity2Id)
+        val trans1 = mTransform.get(entity1Id)
+        val trans2 = mTransform.get(entity2Id)
+        val size1 = mSize.get(entity1Id)
+        val size2 = mSize.get(entity2Id)
 
         when (collider1.colliderType) {
             ColliderType.RECT -> {
@@ -124,8 +131,8 @@ class CollisionDetectionSystem @JvmOverloads constructor(
         return overlaps
     }
 
-    override fun removed(entity: Entity?) {
-        phases.clear(entity!!.id)
+    override fun removed(entity: Entity) {
+        phases.clear(entity.id)
     }
 
     fun onCollisionEnter(entity1Id: Int, collider1: Collider, entity2Id: Int, collider2: Collider) {
@@ -138,8 +145,9 @@ class CollisionDetectionSystem @JvmOverloads constructor(
         }
 
         if (eventDispatchingEnabled) {
-            events!!.dispatch(net.bossdragon.system.base.collision.messaging.CollisionEvent::class.java)
-                .setup(entity1Id, entity2Id, net.bossdragon.system.base.collision.messaging.CollisionEvent.ENTER)
+            events!!
+                .dispatch(CollisionEvent::class.java)
+                .setup(entity1Id, entity2Id, CollisionEvent.ENTER)
         }
     }
 
@@ -153,8 +161,8 @@ class CollisionDetectionSystem @JvmOverloads constructor(
         }
 
         if (eventDispatchingEnabled) {
-            events!!.dispatch(net.bossdragon.system.base.collision.messaging.CollisionEvent::class.java)
-                .setup(entity1Id, entity2Id, net.bossdragon.system.base.collision.messaging.CollisionEvent.EXIT)
+            events!!.dispatch(CollisionEvent::class.java)
+                .setup(entity1Id, entity2Id, CollisionEvent.EXIT)
         }
     }
 
