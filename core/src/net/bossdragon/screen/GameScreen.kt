@@ -5,12 +5,10 @@ import com.artemis.WorldConfigurationBuilder
 import com.artemis.managers.TagManager
 import net.bossdragon.system.*
 import net.bossdragon.system.base.MovementSystem
-
 import net.bossdragon.system.base.PositionSystem
-import net.bossdragon.system.base.TimeProgressingSystem
 import net.bossdragon.system.base.collision.CollisionDebugSystem
-import net.bossdragon.system.base.collision.CollisionDetectionSystem
 import net.bossdragon.system.base.events.EventSystem
+import net.bossdragon.system.view.PlayerCharacterAnimSystem
 import net.bossdragon.system.view.render.DeferredRendererSetSystem
 import net.bossdragon.system.view.render.RenderSystem
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin
@@ -31,10 +29,10 @@ class GameScreen : WorldScreen() {
                 InputSystem(),
                 PlayerStateSystem(),
                 EventSystem(),
-                TimeProgressingSystem(),
                 PositionSystem(),
                 CollisionSystem(),
                 MovementSystem(),
+                PlayerCharacterAnimSystem(),
                 RenderSystem(),
                 CollisionDebugSystem(),
                 DeferredRendererSetSystem()

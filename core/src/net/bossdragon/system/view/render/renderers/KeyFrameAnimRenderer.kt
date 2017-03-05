@@ -7,22 +7,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import net.bossdragon.component.base.Transform
 import net.bossdragon.component.render.Renderable
-import net.bossdragon.component.base.Progressing
 import net.bossdragon.component.base.Size
 import net.bossdragon.component.render.anim.KeyFrameAnimations
 import net.bossdragon.system.view.render.RenderBatchingSystem
 
-class KeyFrameAnimRenderer(world: World, private val batch: SpriteBatch)
+class KeyFrameAnimRenderer(
+    private val world: World,
+    private val batch: SpriteBatch
+)
     : RenderBatchingSystem.EntityProcessAgent {
 
     private var mFrames: ComponentMapper<KeyFrameAnimations>
-    private var mProgressing: ComponentMapper<Progressing>
     private var mTransform: ComponentMapper<Transform>
     private var mSize: ComponentMapper<Size>
 
     init {
         mFrames = world.getMapper(KeyFrameAnimations::class.java)
-        mProgressing = world.getMapper(Progressing::class.java)
         mTransform = world.getMapper(Transform::class.java)
         mSize = world.getMapper(Size::class.java)
     }
@@ -37,7 +37,6 @@ class KeyFrameAnimRenderer(world: World, private val batch: SpriteBatch)
 
     override fun process(e: Entity) {
         val frames = mFrames[e]
-        val progress = mProgressing[e]
         val transform = mTransform.getSafe(e, null)
         val size = mSize.getSafe(e, null)
 
@@ -58,7 +57,9 @@ class KeyFrameAnimRenderer(world: World, private val batch: SpriteBatch)
             y += transform.currentPos.y + transform.displacement.y
         }
 
-        val tex = frames.currentAnimation!!.getKeyFrame(progress.stateTime, true) as TextureRegion
+        frames.stateTime += world.getDelta()
+
+        val tex = frames.currentAnimation!!.getKeyFrame(frames.stateTime, true) as TextureRegion
         batch.draw(tex, x, y, w, h)
     }
 

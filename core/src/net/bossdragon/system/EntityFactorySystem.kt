@@ -15,7 +15,6 @@ import net.bossdragon.component.base.Size
 import net.bossdragon.component.base.Transform
 import net.bossdragon.component.render.Renderable
 import net.bossdragon.component.render.TextureComponent
-import net.bossdragon.component.base.Progressing
 import net.bossdragon.component.base.Velocity
 import net.bossdragon.component.render.anim.KeyFrameAnimations
 import net.bossdragon.enums.Assets
@@ -121,7 +120,6 @@ class EntityFactorySystem : PassiveSystem() {
         e.create(Renderable::class.java)
             .type(Renderable.ANIM)
 
-        e.create(Progressing::class.java)
         e.create(KeyFrameAnimations::class.java)
             .setup(assets.playerAnims)
 

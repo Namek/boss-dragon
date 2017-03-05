@@ -16,6 +16,8 @@ class KeyFrameAnimations : PooledComponent() {
     @JvmField var animations: KeyFrameAnimationsMap? = null
     var width: Float = 0.toFloat()
     var height: Float = 0.toFloat()
+    var stateTime: Float = 0f
+
 
     init {
         this.animations = KeyFrameAnimationsMap()
@@ -42,12 +44,20 @@ class KeyFrameAnimations : PooledComponent() {
         return this
     }
 
-    fun setAnimation(index: Int) {
-        currentAnimation = animations!![index]
+    fun setAnimation(index: Int): Boolean {
+        val newAnim = animations!![index]
+        val isChanging = newAnim != currentAnimation
+
+        currentAnimation = newAnim
+        return isChanging
     }
 
-    fun setAnimation(name: String) {
+    fun setAnimation(name: String): Boolean {
+        val newAnim = animations!![name]
+        val isChanging = newAnim != currentAnimation
+
         currentAnimation = animations!![name]
+        return isChanging
     }
 
 

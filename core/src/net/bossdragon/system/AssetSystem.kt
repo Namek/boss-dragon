@@ -28,7 +28,7 @@ class AssetSystem : BaseSystem() {
         val animations = TripleList.create<String, Float, Int>()
             .add(Animations.StickMan.WALK_RIGHT, 0.12f, 0)
             .add(Animations.StickMan.WALK_LEFT, 0.12f, 1)
-            .add(Animations.StickMan.STAND, 0.5f, 2)
+            .add(Animations.StickMan.IDLE, 0.5f, 2)
             .add(Animations.StickMan.JUMP, C.Player.JumpTime / framesCountPerAnimation.toFloat(), 3)
             .add(Animations.StickMan.LYING, 0.5f, 4)
 

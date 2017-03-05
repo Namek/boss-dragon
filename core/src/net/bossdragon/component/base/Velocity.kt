@@ -61,4 +61,16 @@ class Velocity : PooledComponent() {
     fun setMovement(dirX: Int, dirY: Int) {
         setMovement(dirX, dirY, maxSpeed)
     }
+
+    val isMoveRequested: Boolean
+        get() = acceleration.len2() > 0
+
+    val isMoving: Boolean
+        get() = velocity.len2() > 0
+
+    val isStopping: Boolean
+        get() = isMoving && !isMoveRequested
+
+    val isIdle: Boolean
+        get() = !isMoving && !isMoveRequested
 }

@@ -36,6 +36,11 @@ class PlayerStateSystem : EntityProcessingSystem(
 
     lateinit internal var input: Input
 
+    var dirX = 0
+    var dirY = 0
+    var requestedSlide = false
+
+
     override fun initialize() {
         inputSystem.enableDebugCamera = false
         input = Gdx.input
@@ -46,20 +51,18 @@ class PlayerStateSystem : EntityProcessingSystem(
         val transform = mTransform.get(e)
         val velocity = mVelocity.get(e)
 
-        var dirX = 0
-        var dirY = 0
+        if (requestedSlide && canSlide()) {
+            // TODO slide
 
-        if (input.isKeyPressed(Keys.LEFT))
-            dirX = -1
-        else if (input.isKeyPressed(Keys.RIGHT))
-            dirX = +1
+            requestedSlide = false
+        }
+        else {
+            velocity.setMovement(dirX, dirY, C.Player.Acceleration)
+        }
+    }
 
-        if (input.isKeyPressed(Keys.UP))
-            dirY = +1
-        else if (input.isKeyPressed(Keys.DOWN))
-            dirY = -1
-
-        velocity.setMovement(dirX, dirY, C.Player.Acceleration)
+    private fun canSlide(): Boolean {
+        return false
     }
 
     override fun onCollisionEnter(entityId: Int, otherEntityId: Int) {
