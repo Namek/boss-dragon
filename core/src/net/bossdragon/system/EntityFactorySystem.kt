@@ -111,9 +111,12 @@ class EntityFactorySystem : PassiveSystem() {
 
         e.create(Transform::class.java)
 
+        val originX = 0.5f
+        val originY = 0f
+
         val size = e.create(Size::class.java)
             .set(Assets.StickMan.Width.toFloat(), Assets.StickMan.Height.toFloat())
-            .origin(0f, 0f)
+            .origin(originX, originY)
 
         e.create(Renderable::class.java)
             .type(Renderable.ANIM)

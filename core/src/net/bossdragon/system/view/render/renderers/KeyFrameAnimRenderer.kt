@@ -43,10 +43,14 @@ class KeyFrameAnimRenderer(world: World, private val batch: SpriteBatch)
 
         var x = 0f
         var y = 0f
+        var w = frames.width
+        var h = frames.height
 
         if (size != null) {
-            x += -size.origin.x * frames.width
-            y += -size.origin.y * frames.height
+            w = size.width
+            h = size.height
+            x += -size.origin.x * w
+            y += -size.origin.y * h
         }
 
         if (transform != null) {
@@ -55,7 +59,7 @@ class KeyFrameAnimRenderer(world: World, private val batch: SpriteBatch)
         }
 
         val tex = frames.currentAnimation!!.getKeyFrame(progress.stateTime, true) as TextureRegion
-        batch.draw(tex, x, y)
+        batch.draw(tex, x, y, w, h)
     }
 
     override val type: Int

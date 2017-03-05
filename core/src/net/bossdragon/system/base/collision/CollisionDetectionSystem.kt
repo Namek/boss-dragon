@@ -151,15 +151,16 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
 
         when (collider.spatialPosCalc) {
             Collider.SpatialCalculation.BasedOnSizeComponent -> {
-                // don't add anything
+                outRect.x -= size.origin.x * outRect.width
+                outRect.y -= size.origin.y * outRect.height
             }
             Collider.SpatialCalculation.Constant -> {
                 outRect.x += collider.spatialPos.x
                 outRect.y += collider.spatialPos.y
             }
             Collider.SpatialCalculation.Scale -> {
-                outRect.x += (collider.spatialPos.x * size.width)
-                outRect.y += (collider.spatialPos.y * size.height)
+                outRect.x -= (collider.spatialPos.x * size.width)
+                outRect.y -= (collider.spatialPos.y * size.height)
             }
         }
     }
