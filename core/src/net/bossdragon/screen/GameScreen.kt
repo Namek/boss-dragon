@@ -8,11 +8,11 @@ import net.bossdragon.system.base.MovementSystem
 
 import net.bossdragon.system.base.PositionSystem
 import net.bossdragon.system.base.TimeProgressingSystem
+import net.bossdragon.system.base.collision.CollisionDebugSystem
 import net.bossdragon.system.base.collision.CollisionDetectionSystem
 import net.bossdragon.system.base.events.EventSystem
 import net.bossdragon.system.view.render.DeferredRendererSetSystem
 import net.bossdragon.system.view.render.RenderSystem
-import net.bossdragon.system.view.render.debug.TopDownEntityDebugSystem
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin
 import net.mostlyoriginal.api.screen.core.WorldScreen
 import net.namekdev.entity_tracker.EntityTracker
@@ -36,8 +36,8 @@ class GameScreen : WorldScreen() {
                 CollisionSystem(),
                 MovementSystem(),
                 RenderSystem(),
-                DeferredRendererSetSystem(),
-                TopDownEntityDebugSystem()
+                CollisionDebugSystem(),
+                DeferredRendererSetSystem()
             )
             .with(
                 TagManager()

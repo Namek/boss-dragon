@@ -131,6 +131,12 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
         return overlaps
     }
 
+    internal fun calculateColliderRect(e: Entity, outRect: Rectangle): Collider {
+        val collider = mCollider[e]
+        setColliderRect(collider, mTransform[e], mSize[e], outRect)
+        return collider
+    }
+
     private inline fun setColliderRect(collider: Collider, trans: Transform, size: Size, outRect: Rectangle) {
         outRect.setPosition(trans.currentPos.x, trans.currentPos.y)
 

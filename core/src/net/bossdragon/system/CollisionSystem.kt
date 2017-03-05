@@ -1,11 +1,9 @@
 package net.bossdragon.system
 
 import com.artemis.Entity
-import net.bossdragon.component.base.Velocity
 import net.bossdragon.system.base.collision.CollisionDetectionSystem
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener
 import net.bossdragon.system.base.collision.messaging.CollisionExitListener
-import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 import net.bossdragon.enums.CollisionGroups as CG
 
 class CollisionSystem : CollisionDetectionSystem(true) {
