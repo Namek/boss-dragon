@@ -10,6 +10,7 @@ import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.ControllerListener
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController
+import com.badlogic.gdx.math.Vector2
 import net.bossdragon.enums.Xbox360Controller.*
 import net.bossdragon.system.base.collision.CollisionDebugSystem
 import net.bossdragon.system.base.events.EventSystem
@@ -20,6 +21,7 @@ class InputSystem : BaseSystem() {
     lateinit internal var renderSystem: RenderSystem
     lateinit internal var collisionDebugSystem: CollisionDebugSystem
     lateinit internal var events: EventSystem
+    lateinit internal var entityFactory: EntityFactorySystem
     lateinit internal var playerSystem: PlayerStateSystem
 
     lateinit internal var inputMultiplexer: InputMultiplexer
@@ -111,5 +113,11 @@ class InputSystem : BaseSystem() {
 
         if (input.isKeyJustPressed(Keys.SPACE))
             playerSystem.requestedSlide = true
+
+
+        // TODO just a test, to be removed
+        if (input.isKeyJustPressed(Keys.X)) {
+            entityFactory.createFireball(Vector2(-600f, 0f), Vector2(1f, 0f))
+        }
     }
 }

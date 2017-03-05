@@ -8,6 +8,7 @@ buildscript {
         roboVMVersion = '2.2.0'
         artemisVersion = '2.1.0'
         artemisContribVersion = "2.1.0"
+        artemisOrionVersion = "97a4e4e"
         //box2DLightsVersion = '1.4'
         //aiVersion = '1.8.0'
     }
@@ -15,10 +16,10 @@ buildscript {
     repositories {
     	mavenLocal()
         mavenCentral()
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-		maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
         jcenter()
-        maven { url 'https://jitpack.io' }
+        maven { url "https://jitpack.io" }
     }
 
     dependencies {
@@ -44,7 +45,7 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-        maven { url "http://programmers-friend.org/maven/repo/" }
+//        maven { url "http://programmers-friend.org/maven/repo/" }
         maven { url 'https://jitpack.io' }
     }
 }
@@ -205,6 +206,9 @@ project(":core") {
         compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-core:$artemisContribVersion"
         compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-eventbus:$artemisContribVersion"
         compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-jam:$artemisContribVersion"
+
+        // artemis-odb-orion: Action API - tweens, animations, sequential/parallel operations
+        compile "com.github.Namek:artemis-odb-orion:$artemisOrionVersion"
         
         // Entity Tracker for Artemis-odb
         compile "net.namekdev.entity_tracker:artemis-entity-tracker:0.4.0-SNAPSHOT"

@@ -112,12 +112,12 @@ class Collider : PooledComponent() {
         exitListener = null
     }
 
-    fun hasGroup(group: Long): Boolean {
+    fun isInGroup(group: Long): Boolean {
         return this.groups and group > 0
     }
 
-    fun hasGroups(groups: Long): Boolean {
-        return this.groups and groups > 0
+    fun isInAnyGroup(groups: Long, relations: CollisionGroupsRelations): Boolean {
+        return relations.anyRelationExists(groups, this.groups)
     }
 }
 

@@ -138,8 +138,6 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
     }
 
     private inline fun setColliderRect(collider: Collider, trans: Transform, size: Size, outRect: Rectangle) {
-        outRect.setPosition(trans.currentPos.x, trans.currentPos.y)
-
         when (collider.spatialSizeCalc) {
             Collider.SpatialCalculation.BasedOnSizeComponent -> {
                 outRect.setSize(size.width, size.height)
@@ -154,6 +152,8 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
                 )
             }
         }
+
+        outRect.setPosition(trans.currentPos.x, trans.currentPos.y)
 
         when (collider.spatialPosCalc) {
             Collider.SpatialCalculation.BasedOnSizeComponent -> {

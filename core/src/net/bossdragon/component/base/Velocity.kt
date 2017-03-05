@@ -62,6 +62,10 @@ class Velocity : PooledComponent() {
         setMovement(dirX, dirY, maxSpeed)
     }
 
+    fun setVelocityAtMax(dir: Vector2) {
+        velocity.set(dir).setLength(maxSpeed)
+    }
+
     val isMoveRequested: Boolean
         get() = acceleration.len2() > 0
 

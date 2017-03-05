@@ -15,6 +15,7 @@ import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMa
 import net.mostlyoriginal.api.screen.core.WorldScreen
 import net.namekdev.entity_tracker.EntityTracker
 import net.namekdev.entity_tracker.network.EntityTrackerServer
+import se.feomedia.orion.system.OperationSystem
 
 class GameScreen : WorldScreen() {
     override fun createWorld(): World {
@@ -26,6 +27,7 @@ class GameScreen : WorldScreen() {
                 WorldInitSystem()
             )
             .with(
+                OperationSystem(),
                 InputSystem(),
                 PlayerStateSystem(),
                 EventSystem(),

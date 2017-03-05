@@ -13,5 +13,7 @@ class TextureComponent : PooledComponent() {
 
     override fun reset() {
         texture = null
+        blendSrcFunc = GL20.GL_SRC_ALPHA
+        blendDestFunc = GL20.GL_ONE_MINUS_SRC_ALPHA
     }
 }

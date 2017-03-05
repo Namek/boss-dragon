@@ -6,26 +6,22 @@ import com.artemis.Entity
 import com.artemis.EntityEdit
 import com.artemis.annotations.Wire
 import com.artemis.managers.TagManager
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.math.Vector2
 import net.bossdragon.component.Player
 import net.bossdragon.component.base.Size
 import net.bossdragon.component.base.Transform
+import net.bossdragon.component.base.Velocity
 import net.bossdragon.component.render.Renderable
 import net.bossdragon.component.render.TextureComponent
-import net.bossdragon.component.base.Velocity
 import net.bossdragon.component.render.anim.KeyFrameAnimations
 import net.bossdragon.enums.Assets
 import net.bossdragon.enums.C
 import net.bossdragon.enums.CollisionGroups
 import net.bossdragon.enums.Tags
 import net.bossdragon.system.base.collision.Collider
-
 import net.bossdragon.system.view.render.RenderSystem
-import net.bossdragon.system.view.render.anim.KeyFrameAnimationsMap
-import net.bossdragon.util.collections.tuples.TripleList
 import net.mostlyoriginal.api.system.core.PassiveSystem
 
 @Wire
@@ -45,15 +41,6 @@ class EntityFactorySystem : PassiveSystem() {
             .add(Size::class.java)
             .add(Renderable::class.java)
             .build(world)
-
-        //		energyBallArchetype = new ArchetypeBuilder()
-        //			.add(EnergyBall.class)
-        //			.add(DecalComponent.class)
-        //			.add(Transform.class)
-        //			.add(Renderable.class)
-        //			.add(Damage.class)
-        //			.add(Growable.class)
-        //			.build(world);
     }
 
     fun createRenderable(texturePath: String? = null, width: Float? = null, height: Float? = null): EntityEdit {
@@ -94,7 +81,7 @@ class EntityFactorySystem : PassiveSystem() {
             .type(Renderable.TEXTURE)
 
         e.create(TextureComponent::class.java)
-            .texture = TextureRegion(Texture("graphics/ceiling.jpg"))
+            .texture = assets.ceilingTex
 
         e.create(Collider::class.java)
             .groups(CollisionGroups.WALL)
@@ -113,7 +100,7 @@ class EntityFactorySystem : PassiveSystem() {
         val originX = 0.5f
         val originY = 0f
 
-        val size = e.create(Size::class.java)
+        e.create(Size::class.java)
             .set(Assets.StickMan.Width.toFloat(), Assets.StickMan.Height.toFloat())
             .origin(originX, originY)
 
@@ -125,13 +112,40 @@ class EntityFactorySystem : PassiveSystem() {
 
         e.create(Player::class.java)
         e.create(Collider::class.java)
-            .groups(CollisionGroups.PLAYER)
+            .groups(CollisionGroups.CHARACTER)
             .spatialConstantSize(Assets.StickMan.ColliderWidth, Assets.StickMan.ColliderHeight)
 
         e.create(Velocity::class.java)
             .maxSpeed(C.Player.MaxSpeed)
             .friction(C.Player.Friction)
 
+
+        return entity
+    }
+
+    fun createFireball(pos: Vector2, dir: Vector2): Entity {
+        val entity = world.createEntity()
+        val e = entity.edit()
+
+        e.create(Transform::class.java)
+            .xy(pos)
+
+        e.create(Velocity::class.java)
+            .maxSpeed(C.Fireball.MaxSpeed)
+            .setVelocityAtMax(dir)
+
+        e.create(Renderable::class.java)
+            .type(Renderable.TEXTURE)
+
+        e.create(TextureComponent::class.java)
+            .texture = assets.fireballTex
+
+        e.create(Size::class.java)
+            .set(C.Fireball.Size, C.Fireball.Size)
+            .origin(0.5f, 0.5f)
+
+        e.create(Collider::class.java)
+            .groups(CollisionGroups.FIREBALL)
 
         return entity
     }

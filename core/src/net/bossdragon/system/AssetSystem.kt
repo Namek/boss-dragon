@@ -18,6 +18,8 @@ class AssetSystem : BaseSystem() {
 
     lateinit var playerAnims: KeyFrameAnimationsMap
     lateinit var explosionAnim: KeyFrameAnimationsMap
+    lateinit var ceilingTex: TextureRegion
+    lateinit var fireballTex: TextureRegion
 
     private fun load() {
         // player animations
@@ -29,7 +31,7 @@ class AssetSystem : BaseSystem() {
             .add(Animations.StickMan.WALK_RIGHT, 0.12f, 0)
             .add(Animations.StickMan.WALK_LEFT, 0.12f, 1)
             .add(Animations.StickMan.IDLE, 0.5f, 2)
-            .add(Animations.StickMan.JUMP, C.Player.JumpTime / framesCountPerAnimation.toFloat(), 3)
+            .add(Animations.StickMan.JUMP, 0.5f, 3)
             .add(Animations.StickMan.LYING, 0.5f, 4)
 
         playerAnims = KeyFrameAnimationsMap.create(animations, frames)
@@ -39,5 +41,9 @@ class AssetSystem : BaseSystem() {
         val explosionTexture = TextureRegion(Texture("graphics/explosion.png"))
         frames = explosionTexture.split(explosionTexture.regionWidth, explosionTexture.regionHeight)
         explosionAnim = KeyFrameAnimationsMap.create(0.1f, frames[0])
+
+        // textures
+        ceilingTex = TextureRegion(Texture("graphics/ceiling.jpg"))
+        fireballTex = TextureRegion(Texture("graphics/fireball.png"))
     }
 }

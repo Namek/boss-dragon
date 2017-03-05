@@ -1,11 +1,16 @@
 package net.bossdragon.component.render
 
 import com.artemis.PooledComponent
+import net.bossdragon.component.render.anim.KeyFrameAnimations
 
 class Renderable : PooledComponent() {
     companion object {
         const val NONE = 0
+
+        /** @see [TextureComponent] */
         const val TEXTURE = 2
+
+        /** @see [KeyFrameAnimations] */
         const val ANIM = 4
     }
 

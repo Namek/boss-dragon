@@ -8,7 +8,10 @@ object C {
         val MaxSpeed = 400f
         val Acceleration = MaxSpeed * 12
         val Friction = MaxSpeed * 10
+    }
 
-        val JumpTime = 0.35f
+    object Fireball {
+        val MaxSpeed = 600f
+        val Size = 60f
     }
 }

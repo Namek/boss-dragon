@@ -19,13 +19,19 @@ class Transform : PooledComponent() {
     /** Additional displacement to position. Usually used for graphics puroses, like head bobbing. */
     val displacement = Vector2()
 
-    /** radians */
+    /** degrees */
     var rotation = 0f
 
 
     fun xy(x: Float, y: Float): Transform {
         desiredPos.set(x, y)
         currentPos.set(x, y)
+        return this
+    }
+
+    fun xy(pos: Vector2): Transform {
+        desiredPos.set(pos)
+        currentPos.set(pos)
         return this
     }
 
@@ -39,6 +45,6 @@ class Transform : PooledComponent() {
     fun toDirection(outDir: Vector2): Vector2 {
         return outDir
             .set(companion.DEFAULT_DIRECTION)
-            .rotateRad(rotation)
+            .rotate(rotation)
     }
 }

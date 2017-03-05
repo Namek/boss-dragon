@@ -33,12 +33,17 @@ class TextureRenderer(world: World, private val batch: SpriteBatch) : EntityProc
     override fun process(e: Entity) {
         val texture = mTexture[e]
         val transform = mTransform[e]
-        val size = mSize[e]
+        val size = mSize.getSafe(e, null)
 
-        val x = transform.currentPos.x + transform.displacement.x
-        val y = transform.currentPos.y + transform.displacement.y
-        val originX = size.origin.x * size.width
-        val originY = size.origin.y * size.height
+        val width = size?.width ?: texture.texture!!.regionWidth.toFloat()
+        val height = size?.height ?: texture.texture!!.regionHeight.toFloat()
+
+        val originX = if (size != null) size.origin.x * width else 0f
+        val originY = if (size != null) size.origin.y * height else 0f
+        val x = transform.currentPos.x + transform.displacement.x - originX
+        val y = transform.currentPos.y + transform.displacement.y - originY
+
+        // TODO size?.scale
         val scaleX = 1f
         val scaleY = 1f
 
@@ -47,7 +52,7 @@ class TextureRenderer(world: World, private val batch: SpriteBatch) : EntityProc
         batch.draw(
             texture.texture!!,
             x, y, originX, originY,
-            size.width, size.height,
+            width, height,
             scaleX, scaleY, transform.rotation
         )
     }
