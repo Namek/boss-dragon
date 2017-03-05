@@ -1,20 +1,15 @@
 package net.bossdragon.system
 
 
-import net.bossdragon.system.base.collision.CollisionDetectionSystem
-import net.bossdragon.enums.CollisionGroups as CG
-
 import com.artemis.BaseSystem
 import com.artemis.annotations.Wire
-import com.badlogic.gdx.math.Vector3
 import net.bossdragon.system.view.render.RenderSystem
-import net.bossdragon.system.view.render.debug.TopDownEntityDebugSystem
+import net.bossdragon.enums.CollisionGroups as CG
 
 @Wire
 class WorldInitSystem : BaseSystem() {
     lateinit var factorySystem: EntityFactorySystem
     lateinit var renderSystem: RenderSystem
-    lateinit var topViewDebugSystem: TopDownEntityDebugSystem
 
     internal var isInitialized = false
 

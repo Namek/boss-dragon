@@ -1,5 +1,5 @@
 package net.bossdragon.system.base.collision;
 
-public class ColliderType {
+public class ColliderShape {
 	public static final int RECT = 1;
 }

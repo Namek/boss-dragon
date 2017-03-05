@@ -113,7 +113,7 @@ class EntityFactorySystem : PassiveSystem() {
 
         val size = e.create(Size::class.java)
             .set(Assets.StickMan.Width.toFloat(), Assets.StickMan.Height.toFloat())
-            .origin(0.5f, 0f)
+            .origin(0f, 0f)
 
         e.create(Renderable::class.java)
             .type(Renderable.ANIM)
@@ -124,7 +124,8 @@ class EntityFactorySystem : PassiveSystem() {
 
         e.create(Player::class.java)
         e.create(Collider::class.java)
-            .groups = CollisionGroups.PLAYER
+            .groups(CollisionGroups.PLAYER)
+            .spatialConstantSize(Assets.StickMan.ColliderWidth, Assets.StickMan.ColliderHeight)
 
         e.create(Velocity::class.java)
             .maxSpeed(C.Player.MaxSpeed)

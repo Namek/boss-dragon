@@ -106,22 +106,22 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
         val size1 = mSize.get(entity1Id)
         val size2 = mSize.get(entity2Id)
 
-        when (collider1.colliderType) {
-            ColliderType.RECT -> {
-                rect1.set(trans1.currentPos.x, trans1.currentPos.y, size1.width, size1.height)
+        when (collider1.colliderShape) {
+            ColliderShape.RECT -> {
+                setColliderRect(collider1, trans1, size1, rect1)
             }
         }
-        when (collider2.colliderType) {
-            ColliderType.RECT -> {
-                rect2.set(trans2.currentPos.x, trans2.currentPos.y, size2.width, size2.height)
+        when (collider2.colliderShape) {
+            ColliderShape.RECT -> {
+                setColliderRect(collider2, trans2, size2, rect2)
             }
         }
 
         var overlaps = false
 
-        if (collider1.colliderType == collider2.colliderType) {
-            when (collider1.colliderType) {
-                ColliderType.RECT -> overlaps = rect1.overlaps(rect2)
+        if (collider1.colliderShape == collider2.colliderShape) {
+            when (collider1.colliderShape) {
+                ColliderShape.RECT -> overlaps = rect1.overlaps(rect2)
             }
         }
         else {
@@ -131,17 +131,50 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
         return overlaps
     }
 
+    private inline fun setColliderRect(collider: Collider, trans: Transform, size: Size, outRect: Rectangle) {
+        outRect.setPosition(trans.currentPos.x, trans.currentPos.y)
+
+        when (collider.spatialSizeCalc) {
+            Collider.SpatialCalculation.BasedOnSizeComponent -> {
+                outRect.setSize(size.width, size.height)
+            }
+            Collider.SpatialCalculation.Constant -> {
+                outRect.setSize(collider.spatialSize.x, collider.spatialSize.y)
+            }
+            Collider.SpatialCalculation.Scale -> {
+                outRect.setSize(
+                    collider.spatialSize.x * size.width,
+                    collider.spatialSize.y * size.height
+                )
+            }
+        }
+
+        when (collider.spatialPosCalc) {
+            Collider.SpatialCalculation.BasedOnSizeComponent -> {
+                // don't add anything
+            }
+            Collider.SpatialCalculation.Constant -> {
+                outRect.x += collider.spatialPos.x
+                outRect.y += collider.spatialPos.y
+            }
+            Collider.SpatialCalculation.Scale -> {
+                outRect.x += (collider.spatialPos.x * size.width)
+                outRect.y += (collider.spatialPos.y * size.height)
+            }
+        }
+    }
+
     override fun removed(entity: Entity) {
         phases.clear(entity.id)
     }
 
     fun onCollisionEnter(entity1Id: Int, collider1: Collider, entity2Id: Int, collider2: Collider) {
         if (collider1.enterListener != null) {
-            collider1.enterListener.onCollisionEnter(entity1Id, entity2Id)
+            collider1.enterListener!!.onCollisionEnter(entity1Id, entity2Id)
         }
 
         if (collider2.enterListener != null) {
-            collider2.enterListener.onCollisionEnter(entity2Id, entity1Id)
+            collider2.enterListener!!.onCollisionEnter(entity2Id, entity1Id)
         }
 
         if (eventDispatchingEnabled) {
@@ -153,11 +186,11 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
 
     fun onCollisionExit(entity1Id: Int, collider1: Collider, entity2Id: Int, collider2: Collider) {
         if (collider1.exitListener != null) {
-            collider1.exitListener.onCollisionExit(entity1Id, entity2Id)
+            collider1.exitListener!!.onCollisionExit(entity1Id, entity2Id)
         }
 
         if (collider2.exitListener != null) {
-            collider2.exitListener.onCollisionExit(entity2Id, entity1Id)
+            collider2.exitListener!!.onCollisionExit(entity2Id, entity1Id)
         }
 
         if (eventDispatchingEnabled) {
@@ -168,7 +201,6 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
 
 
     /**
-
      * @author Namek
      * *
      * @todo **Pleease**, optimizee meee!

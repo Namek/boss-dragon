@@ -2,7 +2,14 @@ package net.bossdragon.component.base
 
 import com.artemis.Component
 import com.badlogic.gdx.math.Vector2
+import net.bossdragon.system.base.collision.Collider
 
+/**
+ * Defines graphical size and optionally size of [Collider] if not configured otherwise.
+ * [origin] is graphical only.
+ *
+ * @see Collider.SpatialCalculation
+ */
 class Size : Component() {
     var width = 1f
     var height = 1f

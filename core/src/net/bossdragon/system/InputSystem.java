@@ -7,10 +7,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import net.bossdragon.system.view.render.RenderSystem;
+import net.bossdragon.system.view.render.debug.TopDownEntityDebugSystem;
 
 @Wire
 public class InputSystem extends BaseSystem {
 	RenderSystem renderSystem;
+    TopDownEntityDebugSystem topViewDebugSystem;
 
 	InputMultiplexer inputMultiplexer;
 	CameraInputController debugCamController;
@@ -56,6 +58,8 @@ public class InputSystem extends BaseSystem {
 		}
 
 		if (Gdx.input.isKeyJustPressed(Keys.D)) {
+            topViewDebugSystem.setEnabled(!topViewDebugSystem.isEnabled());
+
 //			String d = StringDump.dump(world);
 //			PrintWriter writer;
 //			try {
