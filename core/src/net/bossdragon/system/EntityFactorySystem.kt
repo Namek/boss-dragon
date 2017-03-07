@@ -9,6 +9,9 @@ import com.artemis.managers.TagManager
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.physics.box2d.BodyDef
+import com.badlogic.gdx.physics.box2d.PolygonShape
+import com.badlogic.gdx.physics.box2d.Shape
 import net.bossdragon.component.Player
 import net.bossdragon.component.base.Size
 import net.bossdragon.component.base.Transform
@@ -21,14 +24,15 @@ import net.bossdragon.enums.C
 import net.bossdragon.enums.CollisionGroups
 import net.bossdragon.enums.Tags
 import net.bossdragon.system.base.collision.Collider
-import net.bossdragon.system.view.render.RenderSystem
+import net.bossdragon.system.base.physics.Physical
+import net.bossdragon.system.base.physics.PhysicsSystem
 import net.mostlyoriginal.api.system.core.PassiveSystem
 
 @Wire
 class EntityFactorySystem : PassiveSystem() {
     lateinit internal var assets: AssetSystem
-    lateinit internal var renderSystem: RenderSystem
     lateinit internal var tags: TagManager
+    lateinit internal var physics: PhysicsSystem
 
 
     internal var fireballArchetype: Archetype? = null
@@ -123,7 +127,7 @@ class EntityFactorySystem : PassiveSystem() {
         return entity
     }
 
-    fun createFireball(pos: Vector2, dir: Vector2): Entity {
+    fun createFireball_old(pos: Vector2, dir: Vector2): Entity {
         val entity = world.createEntity()
         val e = entity.edit()
 
@@ -146,6 +150,43 @@ class EntityFactorySystem : PassiveSystem() {
 
         e.create(Collider::class.java)
             .groups(CollisionGroups.FIREBALL)
+
+        return entity
+    }
+
+    fun createFireball(pos: Vector2, dir: Vector2): Entity {
+        val entity = world.createEntity()
+        val e = entity.edit()
+
+        e.create(Transform::class.java)
+            .xy(pos)
+
+//        e.create(Velocity::class.java)
+//            .maxSpeed(C.Fireball.MaxSpeed)
+//            .setVelocityAtMax(dir)
+
+        e.create(Renderable::class.java)
+            .type(Renderable.TEXTURE)
+
+        e.create(TextureComponent::class.java)
+            .texture = assets.fireballTex
+
+        val size = e.create(Size::class.java)
+            .set(C.Fireball.Size, C.Fireball.Size)
+            .origin(0.5f, 0.5f)
+
+        val bodyDef = BodyDef()
+        bodyDef.type = BodyDef.BodyType.DynamicBody
+        bodyDef.fixedRotation = true
+        val body = physics.engine.createBody(bodyDef)
+        val boxShape = PolygonShape()
+        boxShape.setAsBox(size.width/2, size.height/2)
+        body.createFixture(boxShape, 0.01f)
+
+        e.create(Physical::class.java)
+            .body = body
+
+//        body.setLinearVelocity(dir.x*C.Fireball.MaxSpeed, dir.y*C.Fireball.MaxSpeed)
 
         return entity
     }

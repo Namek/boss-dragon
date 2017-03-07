@@ -32,8 +32,8 @@ class RenderSystem : RenderBatchingSystem() {
     lateinit var mPlayer: ComponentMapper<Player>
 
     lateinit var tagManager: TagManager
+    @Wire lateinit var camera: OrthographicCamera
 
-    lateinit var camera: OrthographicCamera
     lateinit internal var spriteBatch: SpriteBatch
     lateinit internal var textureRenderer: TextureRenderer
     lateinit internal var keyFrameAnimRenderer: KeyFrameAnimRenderer
@@ -44,10 +44,6 @@ class RenderSystem : RenderBatchingSystem() {
 
         world.aspectSubscriptionManager.get(Aspect.all(Renderable::class.java))
             .addSubscriptionListener(this)
-
-        val w = Gdx.graphics.width.toFloat()
-        val h = Gdx.graphics.height.toFloat()
-        camera = OrthographicCamera(w, h)
 
         spriteBatch = SpriteBatch()
         textureRenderer = TextureRenderer(world, spriteBatch)

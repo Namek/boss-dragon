@@ -2,8 +2,10 @@ package net.bossdragon.system.base.collision
 
 import com.artemis.Aspect
 import com.artemis.Entity
+import com.artemis.annotations.Wire
 import com.artemis.systems.EntityProcessingSystem
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import net.bossdragon.component.base.Size
@@ -17,8 +19,8 @@ open class CollisionDebugSystem : EntityProcessingSystem(
         Size::class.java
     ))
 {
+    @Wire lateinit var camera: OrthographicCamera
     lateinit var collisions: CollisionDetectionSystem
-    lateinit var renderSystem: RenderSystem
     lateinit var shapes: ShapeRenderer
 
     private val rect = Rectangle()
@@ -31,8 +33,8 @@ open class CollisionDebugSystem : EntityProcessingSystem(
     }
 
     override fun begin() {
-        shapes.transformMatrix.set(renderSystem.camera.view)
-        shapes.projectionMatrix.set(renderSystem.camera.projection)
+        shapes.transformMatrix.set(camera.view)
+        shapes.projectionMatrix.set(camera.projection)
         shapes.updateMatrices()
         shapes.begin(ShapeRenderer.ShapeType.Line)
     }

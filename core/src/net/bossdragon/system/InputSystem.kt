@@ -16,10 +16,10 @@ import net.bossdragon.system.base.collision.CollisionDebugSystem
 import net.bossdragon.system.base.events.EventSystem
 import net.bossdragon.system.view.render.RenderSystem
 
-@Wire
+@Wire(failOnNull = false)
 class InputSystem : BaseSystem() {
     lateinit internal var renderSystem: RenderSystem
-    lateinit internal var collisionDebugSystem: CollisionDebugSystem
+    @Wire(failOnNull = false) internal var collisionDebugSystem: CollisionDebugSystem? = null
     lateinit internal var events: EventSystem
     lateinit internal var entityFactory: EntityFactorySystem
     lateinit internal var playerSystem: PlayerStateSystem
@@ -75,7 +75,7 @@ class InputSystem : BaseSystem() {
         }
 
         if (input.isKeyJustPressed(Keys.D))
-            collisionDebugSystem.isEnabled = !collisionDebugSystem.isEnabled
+            collisionDebugSystem?.isEnabled = !(collisionDebugSystem?.isEnabled ?: true)
 
         if (input.isKeyJustPressed(Keys.PAGE_DOWN))
             renderSystem.camera.zoom = Math.max(0.1f, renderSystem.camera.zoom / 1.5f)
@@ -117,7 +117,7 @@ class InputSystem : BaseSystem() {
 
         // TODO just a test, to be removed
         if (input.isKeyJustPressed(Keys.X)) {
-            entityFactory.createFireball(Vector2(-600f, 0f), Vector2(1f, 0f))
+            entityFactory.createFireball(Vector2(6f, 0f), Vector2(1f, 0f))
         }
     }
 }
