@@ -3,6 +3,7 @@ package net.bossdragon.system.view.render.renderers
 import com.artemis.ComponentMapper
 import com.artemis.Entity
 import com.artemis.World
+import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import net.bossdragon.component.base.Size
 import net.bossdragon.component.base.Transform
@@ -15,6 +16,9 @@ class TextureRenderer(world: World, private val batch: SpriteBatch) : EntityProc
     private var mTransform: ComponentMapper<Transform>
     private var mSize: ComponentMapper<Size>
 
+    private var lastBlendDstFunc: Int = 0
+    private var lastBlendSrcFunc: Int = 0
+
 
     init {
         mTexture = world.getMapper(TextureComponent::class.java)
@@ -23,11 +27,14 @@ class TextureRenderer(world: World, private val batch: SpriteBatch) : EntityProc
     }
 
     override fun begin() {
+        lastBlendSrcFunc = batch.blendSrcFunc
+        lastBlendDstFunc = batch.blendDstFunc
         batch.begin()
     }
 
     override fun end() {
         batch.end()
+        batch.setBlendFunction(lastBlendSrcFunc, lastBlendDstFunc)
     }
 
     override fun process(e: Entity) {
