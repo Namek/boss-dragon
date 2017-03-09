@@ -27,9 +27,6 @@ class InputSystem : BaseSystem() {
     lateinit internal var inputMultiplexer: InputMultiplexer
     lateinit internal var debugCamController: CameraInputController
 
-    internal var enableDebugCamera = false
-    private val isDebugCamEnabled = false
-
     lateinit var input: Input
     internal var controller: Controller? = null
 
@@ -38,10 +35,6 @@ class InputSystem : BaseSystem() {
         inputMultiplexer = InputMultiplexer()
         input = Gdx.input
         input.inputProcessor = inputMultiplexer
-
-        //		debugCamController = new CameraInputController(renderSystem.camera);
-        //		debugCamController.rotateAngle = -180;
-
         input.isCursorCatched = true
 
         controller = Controllers.getControllers()
@@ -50,22 +43,6 @@ class InputSystem : BaseSystem() {
     }
 
     override fun processSystem() {
-        // Toggle debug camera
-        if (input.isKeyJustPressed(Keys.C)) {
-            enableDebugCamera = !enableDebugCamera
-        }
-
-        if (enableDebugCamera && !isDebugCamEnabled) {
-            inputMultiplexer.addProcessor(debugCamController!!)
-        }
-        else if (!enableDebugCamera && isDebugCamEnabled) {
-            inputMultiplexer.removeProcessor(debugCamController)
-        }
-
-        if (enableDebugCamera) {
-            debugCamController!!.update()
-        }
-
         if (input.isKeyJustPressed(Keys.GRAVE)) {
             input.isCursorCatched = !Gdx.input.isCursorCatched
         }

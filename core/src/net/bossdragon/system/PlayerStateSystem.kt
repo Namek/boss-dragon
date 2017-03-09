@@ -42,7 +42,6 @@ class PlayerStateSystem : EntityProcessingSystem(
 
 
     override fun initialize() {
-        inputSystem.enableDebugCamera = false
         input = Gdx.input
     }
 
