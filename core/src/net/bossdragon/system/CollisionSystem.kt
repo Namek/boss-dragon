@@ -10,8 +10,8 @@ import net.bossdragon.system.base.collision.CollisionDetectionSystem
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener
 import net.bossdragon.system.base.collision.messaging.CollisionExitListener
 import net.bossdragon.util.operations.funcs.*
-import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 import se.feomedia.orion.OperationFactory.*
+import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 import net.bossdragon.enums.CollisionGroups as CG
 
 class CollisionSystem : CollisionDetectionSystem(true) {

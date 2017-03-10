@@ -30,6 +30,8 @@ class GameScreen : WorldScreen() {
             .with(
                 OperationSystem(),
                 InputSystem(),
+                EnemySpawnSystem(),
+                EnemyFightAISystem(),
                 CharacterStateSystem(),
                 EventSystem(),
                 PositionSystem(),
@@ -38,7 +40,9 @@ class GameScreen : WorldScreen() {
                 LogicalToGraphicalPositionmentSystem(),
                 PlayerCharacterAnimSystem(),
                 RenderSystem(),
-                CollisionScaledDebugSystem(),
+                CollisionScaledDebugSystem()
+            )
+            .with(
                 DeferredRendererSetSystem()
             )
             .with(

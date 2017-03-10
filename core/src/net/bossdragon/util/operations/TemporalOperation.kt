@@ -25,8 +25,8 @@ class TemporalOperation : OrigTemporalOperation() {
 
     @Wire
     class CustomTemporalExecutor : OrigTemporalOperation.TemporalExecutor<TemporalOperation>() {
-        override fun act(deltaTime: Float, alpha: Float, operation: TemporalOperation, node: OperationTree) {
-            operation.executor!!.act(deltaTime, operation.percent(), operation.alpha())
+        override fun act(deltaTime: Float, alpha: Float, op: TemporalOperation, node: OperationTree) {
+            op.executor!!.act(deltaTime, op.percent(), op.alpha())
         }
     }
 }

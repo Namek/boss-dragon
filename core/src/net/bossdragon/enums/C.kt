@@ -1,5 +1,7 @@
 package net.bossdragon.enums
 
+import com.badlogic.gdx.math.Vector2
+
 /**
  * Constants.
  */
@@ -11,6 +13,19 @@ object C {
 
         /** Logical -> Graphical */
         val RescaleAxisY = Height / Width
+
+        val SpawnFlyDirections = arrayOf(
+            Vector2(1f, -1f).nor(),
+            Vector2(-1f, -1f).nor(),
+            Vector2(-1f, 1f).nor(),
+            Vector2(1f, 1f).nor()
+        )
+
+        // place those points around map circle
+        // assume: map center is placed on (0, 0)
+        val SpawnLandPoints = SpawnFlyDirections.map { dir ->
+            Vector2(dir).scl(-(LogicalRadius - Assets.Enemy.ColliderRadius))
+        }
     }
 
     object Player {
@@ -28,5 +43,17 @@ object C {
     object Fireball {
         val MaxSpeed = 600f
         val Size = 60f
+    }
+
+    object Enemy {
+        val MinEnemyCount = 8
+        val SpawnCooldown = 2f
+
+        /** distance to spawn point */
+        val SpawnFlyDistance = Map.LogicalRadius / 2
+        val MaxSpeed = Player.MaxSpeed
+        val Friction = Player.Friction
+
+
     }
 }

@@ -31,11 +31,11 @@ class TemporalDeltaOperation : TemporalOperation() {
             op.previousPercentage = 0f
         }
 
-        override fun act(deltaTime: Float, alpha: Float, operation: TemporalDeltaOperation, node: OperationTree) {
-            val percent = operation.percent()
-            val deltaPercentage = percent - operation.previousPercentage
-            operation.executor!!.act(deltaTime, deltaPercentage)
-            operation.previousPercentage = percent
+        override fun act(deltaTime: Float, alpha: Float, op: TemporalDeltaOperation, node: OperationTree) {
+            val percent = op.percent()
+            val deltaPercentage = percent - op.previousPercentage
+            op.executor!!.act(deltaTime, deltaPercentage)
+            op.previousPercentage = percent
         }
     }
 }

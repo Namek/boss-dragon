@@ -78,6 +78,14 @@ fun displaceTo(destination: Vector2, duration: Float, interpolation: Interpolati
     return op
 }
 
+fun opacityTo(targetOpacity: Float, duration: Float, interpolation: Interpolation = Interpolation.linear): OpacityToOperation {
+    val op = operation(OpacityToOperation::class.java)
+    configure(op, duration, interpolation)
+    op.dst = targetOpacity
+
+    return op
+}
+
 fun displaceTo(translation: Vector2): DisplaceToOperation {
     return displaceTo(translation, 0f, Interpolation.linear)
 }
