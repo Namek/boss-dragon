@@ -17,10 +17,12 @@ class PlayerCharacterAnimSystem : EntityProcessingSystem(
 ) {
     lateinit var mKeyFramedAnim: M<KeyFrameAnimations>
     lateinit var mVelocity: M<Velocity>
+    lateinit var mPlayer: M<Player>
 
     override fun process(character: Entity) {
         val vel = mVelocity[character]
         val anim = mKeyFramedAnim[character]
+        val player = mPlayer[character]
 
         var animName = Animations.StickMan.IDLE
 
@@ -34,6 +36,9 @@ class PlayerCharacterAnimSystem : EntityProcessingSystem(
             else if (vel.velocity.y < 0)
                 animName = Animations.StickMan.WALK_LEFT
         }
+
+        if (player.isSliding)
+            animName = Animations.StickMan.LYING
 
         if (anim.setAnimation(animName)) {
             anim.stateTime = 0f

@@ -17,6 +17,12 @@ object C {
         val MaxSpeed = 400f
         val Acceleration = MaxSpeed * 12
         val Friction = MaxSpeed * 10
+
+        val MaxSpeedOnSlide = MaxSpeed * 1.5f
+        val AccelerationOnSlide = Acceleration * 2f
+
+        val SlideDuration = 0.4f
+        val SlideCooldownDuration = 0.3f
     }
 
     object Fireball {
