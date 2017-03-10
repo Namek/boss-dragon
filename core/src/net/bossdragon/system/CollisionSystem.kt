@@ -3,7 +3,9 @@ package net.bossdragon.system
 import com.artemis.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
+import net.bossdragon.component.base.Position
 import net.bossdragon.component.base.Velocity
+import net.bossdragon.enums.C
 import net.bossdragon.system.base.collision.CollisionDetectionSystem
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener
 import net.bossdragon.system.base.collision.messaging.CollisionExitListener

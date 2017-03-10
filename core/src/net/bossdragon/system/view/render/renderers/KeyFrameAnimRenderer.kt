@@ -53,8 +53,8 @@ class KeyFrameAnimRenderer(
         }
 
         if (transform != null) {
-            x += transform.currentPos.x + transform.displacement.x
-            y += transform.currentPos.y + transform.displacement.y
+            x += transform.position.x + transform.displacement.x
+            y += transform.position.y + transform.displacement.y
         }
 
         frames.stateTime += world.getDelta()

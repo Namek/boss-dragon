@@ -9,7 +9,6 @@ import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.ControllerListener
 import com.badlogic.gdx.controllers.Controllers
-import com.badlogic.gdx.graphics.g3d.utils.CameraInputController
 import com.badlogic.gdx.math.Vector2
 import net.bossdragon.enums.Xbox360Controller.*
 import net.bossdragon.system.base.collision.CollisionDebugSystem
@@ -22,10 +21,9 @@ class InputSystem : BaseSystem() {
     lateinit internal var collisionDebugSystem: CollisionDebugSystem
     lateinit internal var events: EventSystem
     lateinit internal var entityFactory: EntityFactorySystem
-    lateinit internal var playerSystem: PlayerStateSystem
+    lateinit internal var characterSystem: CharacterStateSystem
 
     lateinit internal var inputMultiplexer: InputMultiplexer
-    lateinit internal var debugCamController: CameraInputController
 
     lateinit var input: Input
     internal var controller: Controller? = null
@@ -64,32 +62,32 @@ class InputSystem : BaseSystem() {
         val controller = this.controller
         if (controller != null) {
             if (controller.getButton(BUTTON_A)) {
-                playerSystem.requestedSlide = true
+                characterSystem.requestedSlide = true
             }
 
             val x = controller.getAxis(AXIS_LEFT_X)
             val y = controller.getAxis(AXIS_LEFT_Y)
-            playerSystem.dirX = if (Math.abs(x) > 0.5f) Math.signum(x).toInt() else 0
-            playerSystem.dirY = if (Math.abs(y) > 0.5f) -Math.signum(y).toInt() else 0
+            characterSystem.dirX = if (Math.abs(x) > 0.5f) Math.signum(x).toInt() else 0
+            characterSystem.dirY = if (Math.abs(y) > 0.5f) -Math.signum(y).toInt() else 0
         }
 
 
         if (input.isKeyPressed(Keys.LEFT))
-            playerSystem.dirX = -1
+            characterSystem.dirX = -1
         else if (input.isKeyPressed(Keys.RIGHT))
-            playerSystem.dirX = +1
+            characterSystem.dirX = +1
         else if (controller == null)
-            playerSystem.dirX = 0
+            characterSystem.dirX = 0
 
         if (input.isKeyPressed(Keys.UP))
-            playerSystem.dirY = +1
+            characterSystem.dirY = +1
         else if (input.isKeyPressed(Keys.DOWN))
-            playerSystem.dirY = -1
+            characterSystem.dirY = -1
         else if (controller == null)
-            playerSystem.dirY = 0
+            characterSystem.dirY = 0
 
         if (input.isKeyJustPressed(Keys.SPACE))
-            playerSystem.requestedSlide = true
+            characterSystem.requestedSlide = true
 
 
         // TODO just a test, to be removed

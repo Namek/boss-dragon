@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
 import net.bossdragon.component.Player
+import net.bossdragon.component.base.Position
 import net.bossdragon.component.base.Size
 import net.bossdragon.component.base.Transform
 import net.bossdragon.component.base.Velocity
@@ -18,11 +19,11 @@ import net.bossdragon.component.render.TextureComponent
 import net.bossdragon.component.render.anim.KeyFrameAnimations
 import net.bossdragon.enums.Assets
 import net.bossdragon.enums.C
-import net.bossdragon.enums.CollisionGroups
 import net.bossdragon.enums.Tags
 import net.bossdragon.system.base.collision.Collider
 import net.bossdragon.system.view.render.RenderSystem
 import net.mostlyoriginal.api.system.core.PassiveSystem
+import net.bossdragon.enums.CollisionGroups as CG
 
 @Wire
 class EntityFactorySystem : PassiveSystem() {
@@ -67,28 +68,6 @@ class EntityFactorySystem : PassiveSystem() {
         return e
     }
 
-    fun createTestBg(): Entity {
-        val entity = world.createEntity()
-        val e = entity.edit()
-        e.add(Player())
-        val size = e.create(Size::class.java)
-            .set(100f, 100f)
-
-        e.create(Transform::class.java)
-            .xy(-size.width/2, -size.height/2)
-
-        e.create(Renderable::class.java)
-            .type(Renderable.TEXTURE)
-
-        e.create(TextureComponent::class.java)
-            .texture = assets.ceilingTex
-
-        e.create(Collider::class.java)
-            .groups(CollisionGroups.WALL)
-
-        return entity
-    }
-
     fun createPlayer(): Entity {
         val entity = world.createEntity()
         val e = entity.edit()
@@ -96,12 +75,13 @@ class EntityFactorySystem : PassiveSystem() {
         tags.register(Tags.Player, entity)
 
         e.create(Transform::class.java)
+        e.create(Position::class.java)
 
         val originX = 0.5f
         val originY = 0f
 
         e.create(Size::class.java)
-            .set(Assets.StickMan.Width.toFloat(), Assets.StickMan.Height.toFloat())
+            .set(Assets.Character.Width.toFloat(), Assets.Character.Height.toFloat())
             .origin(originX, originY)
 
         e.create(Renderable::class.java)
@@ -112,8 +92,8 @@ class EntityFactorySystem : PassiveSystem() {
 
         e.create(Player::class.java)
         e.create(Collider::class.java)
-            .groups(CollisionGroups.CHARACTER)
-            .spatialConstantSize(Assets.StickMan.ColliderWidth, Assets.StickMan.ColliderHeight)
+            .groups(CG.CHARACTER)
+            .setCircular(Assets.Character.ColliderRadius)
 
         e.create(Velocity::class.java)
             .maxSpeed(C.Player.MaxSpeed)
@@ -128,6 +108,9 @@ class EntityFactorySystem : PassiveSystem() {
         val e = entity.edit()
 
         e.create(Transform::class.java)
+            .xy(pos)
+
+        e.create(Position::class.java)
             .xy(pos)
 
         e.create(Velocity::class.java)
@@ -145,7 +128,38 @@ class EntityFactorySystem : PassiveSystem() {
             .origin(0.5f, 0.5f)
 
         e.create(Collider::class.java)
-            .groups(CollisionGroups.FIREBALL)
+            .groups(CG.FIREBALL)
+            .setCircular(C.Fireball.Size/2)
+
+        return entity
+    }
+
+    fun createMap(): Entity {
+        val entity = world.createEntity()
+        val e = entity.edit()
+
+        tags.register(Tags.Map, e.entityId)
+
+        e.create(Transform::class.java)
+            .xy(0f, 0f)
+
+        e.create(Size::class.java)
+            .set(C.Map.Width, C.Map.Height)
+            .origin(0.5f, 0.5f)
+
+        e.create(Position::class.java)
+            .xy(0f, 0f)
+
+        e.create(Collider::class.java)
+            .groups(CG.WALL)
+            .setCircular(C.Map.LogicalRadius)
+
+        e.create(Renderable::class.java)
+            .type(Renderable.TEXTURE)
+
+        e.create(TextureComponent::class.java)
+            .texture = assets.playgroundTex
+
 
         return entity
     }

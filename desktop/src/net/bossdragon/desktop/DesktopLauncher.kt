@@ -10,6 +10,8 @@ object DesktopLauncher {
         val config = LwjglApplicationConfiguration()
         config.x = 0
         config.y = 300
+        config.width = 900
+        config.height = 600
         LwjglApplication(GdxArtemisGame(), config)
     }
 }

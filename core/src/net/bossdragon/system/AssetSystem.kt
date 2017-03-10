@@ -20,11 +20,12 @@ class AssetSystem : BaseSystem() {
     lateinit var explosionAnim: KeyFrameAnimationsMap
     lateinit var ceilingTex: TextureRegion
     lateinit var fireballTex: TextureRegion
+    lateinit var playgroundTex: TextureRegion
 
     private fun load() {
         // player animations
         val stickManAnimationsTexture = TextureRegion(Texture("graphics/stickman_anim.png"))
-        var frames = stickManAnimationsTexture.split(Assets.StickMan.Width, Assets.StickMan.Height)
+        var frames = stickManAnimationsTexture.split(Assets.Character.Width, Assets.Character.Height)
         val framesCountPerAnimation = frames[0].size
 
         val animations = TripleList.create<String, Float, Int>()
@@ -45,5 +46,6 @@ class AssetSystem : BaseSystem() {
         // textures
         ceilingTex = TextureRegion(Texture("graphics/ceiling.jpg"))
         fireballTex = TextureRegion(Texture("graphics/fireball.png"))
+        playgroundTex = TextureRegion(Texture("graphics/playground.png"))
     }
 }

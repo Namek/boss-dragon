@@ -72,7 +72,7 @@ class RenderSystem : RenderBatchingSystem() {
         super.processSystem()
 
 //        val entity = tagManager.getEntity(Tags.Player)
-//        val transform = mTransform.get(entity)
+//        val transform = mPosition.get(entity)
 //        val player = mPlayer.get(entity)
 
         /*

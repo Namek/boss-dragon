@@ -15,7 +15,7 @@ class WorldInitSystem : BaseSystem() {
 
 
     internal fun _initialize() {
-        factorySystem.createTestBg()
+        factorySystem.createMap()
         factorySystem.createPlayer()
     }
 

@@ -79,6 +79,11 @@ class Collider : PooledComponent() {
         return this
     }
 
+    fun setCircular(radius: Float): Collider {
+        colliderShape = ColliderShape.CIRCLE
+        return spatialConstantSize(radius*2, radius*2)
+    }
+
     fun spatialConstantSize(colliderWidth: Float, colliderHeight: Float): Collider {
         spatialSizeCalc = SpatialCalculation.Constant
         spatialSize.set(colliderWidth, colliderHeight)

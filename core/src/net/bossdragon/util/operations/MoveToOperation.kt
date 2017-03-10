@@ -3,14 +3,14 @@ package net.bossdragon.util.operations
 import com.artemis.ComponentMapper
 import com.artemis.annotations.Wire
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.base.Transform
+import net.bossdragon.component.base.Position
 import se.feomedia.orion.Executor
 import se.feomedia.orion.Operation
 import se.feomedia.orion.OperationTree
 import se.feomedia.orion.operation.TemporalOperation
 
 /**
- * Translation over [Transform.currentPos].
+ * Translation over [Position.currentPos].
  */
 class MoveToOperation : TemporalOperation() {
     val src = Vector2()
@@ -28,7 +28,7 @@ class MoveToOperation : TemporalOperation() {
 
     @Wire
     class MoveToExecutor : TemporalOperation.TemporalExecutor<MoveToOperation>() {
-        lateinit var positionMapper: ComponentMapper<Transform>
+        lateinit var positionMapper: ComponentMapper<Position>
 
         override fun begin(op: MoveToOperation, node: OperationTree?) {
             super.begin(op, node)

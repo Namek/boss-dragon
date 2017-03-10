@@ -6,37 +6,34 @@ import com.artemis.Entity
 import com.artemis.annotations.Wire
 import com.artemis.systems.EntityProcessingSystem
 import com.badlogic.gdx.math.Vector2
+import net.bossdragon.component.base.Position
 import net.bossdragon.component.base.PreviousPosition
-import net.bossdragon.component.base.Transform
 import net.bossdragon.component.base.Velocity
 
 
 /**
- *
  * System that calculates **desired** position of moving entity.
  *
  * This system needs a companion system (processing after this one)
- * which will check and modify/copy `desiredPos` position into `currentPos`.
+ * which will check and modify/copy [Position.desiredPos] position into [Position.currentPos].
 
- * @see Transform
-
- * @author Namek
+ * @see Position
  */
 @Wire
 class PositionSystem : EntityProcessingSystem(
-    Aspect.all(Transform::class.java, Velocity::class.java)
+    Aspect.all(Position::class.java, Velocity::class.java)
 ) {
-    lateinit var pm: ComponentMapper<Transform>
+    lateinit var pm: ComponentMapper<Position>
     lateinit var ppm: ComponentMapper<PreviousPosition>
     lateinit var vm: ComponentMapper<Velocity>
 
 
     private val tmpVector = Vector2()
 
-    override fun process(e: Entity) {
-        val position = pm!!.get(e)
-        val previousPosition = ppm!!.get(e)
-        val velocity = vm!!.get(e)
+    override fun process(character: Entity) {
+        val position = pm.get(character)
+        val previousPosition = ppm.get(character)
+        val velocity = vm.get(character)
 
         if (previousPosition != null) {
             previousPosition.pos.set(position.currentPos)
@@ -46,7 +43,7 @@ class PositionSystem : EntityProcessingSystem(
         calculateDesiredPosition(position, velocity, deltaTime)
     }
 
-    fun calculateDesiredPosition(positionComponent: Transform, velocityComponent: Velocity, deltaTime: Float) {
+    fun calculateDesiredPosition(positionComponent: Position, velocityComponent: Velocity, deltaTime: Float) {
         val velocity = velocityComponent.velocity
         val maxSpeed = velocityComponent.maxSpeed
 

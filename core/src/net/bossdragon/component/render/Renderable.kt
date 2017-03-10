@@ -20,7 +20,7 @@ class Renderable : PooledComponent() {
     var layer: Int = 0
 
     /**
-     * Mask for combination of renderer types: NONE, DECAL, TEXTURE, MODEL.
+     * Mask for combination of renderer types: None, DECAL, TEXTURE, MODEL.
      */
     var type: Int = NONE
 

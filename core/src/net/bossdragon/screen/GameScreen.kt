@@ -11,6 +11,7 @@ import net.bossdragon.system.base.events.EventSystem
 import net.bossdragon.system.view.PlayerCharacterAnimSystem
 import net.bossdragon.system.view.render.DeferredRendererSetSystem
 import net.bossdragon.system.view.render.RenderSystem
+import net.bossdragon.system.view.render.debug.CollisionScaledDebugSystem
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin
 import net.mostlyoriginal.api.screen.core.WorldScreen
 import net.namekdev.entity_tracker.EntityTracker
@@ -29,14 +30,15 @@ class GameScreen : WorldScreen() {
             .with(
                 OperationSystem(),
                 InputSystem(),
-                PlayerStateSystem(),
+                CharacterStateSystem(),
                 EventSystem(),
                 PositionSystem(),
                 CollisionSystem(),
-                MovementSystem(),
+                CharacterMapCollisionSystem(),
+                LogicalToGraphicalPositionmentSystem(),
                 PlayerCharacterAnimSystem(),
                 RenderSystem(),
-                CollisionDebugSystem(),
+                CollisionScaledDebugSystem(),
                 DeferredRendererSetSystem()
             )
             .with(
