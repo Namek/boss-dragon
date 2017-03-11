@@ -2,6 +2,7 @@ package net.bossdragon.system
 
 import com.artemis.Aspect
 import com.artemis.systems.IntervalEntitySystem
+import com.artemis.systems.IntervalSystem
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import net.bossdragon.component.Enemy

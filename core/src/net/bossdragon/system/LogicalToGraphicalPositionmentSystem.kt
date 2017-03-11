@@ -19,9 +19,9 @@ class LogicalToGraphicalPositionmentSystem : EntityProcessingSystem(
     lateinit var mTransform: M<Transform>
     lateinit var mPosition: M<Position>
 
-    override fun process(character: Entity) {
-        val pos = mPosition[character].currentPos
-        val transPos = mTransform[character].position
+    override fun process(entity: Entity) {
+        val pos = mPosition[entity].currentPos
+        val transPos = mTransform[entity].position
 
         transPos.set(pos.x, pos.y * C.Map.RescaleAxisY)
     }

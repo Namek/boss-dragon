@@ -54,6 +54,10 @@ object C {
         val MaxSpeed = Player.MaxSpeed
         val Friction = Player.Friction
 
-
+        object AI {
+            val StrategyCooldown = 1f
+            val PlayerCloseRangeRadius = Assets.Character.ColliderRadius * 3
+            val MaxEntitiesTargettingPlayer = 2
+        }
     }
 }

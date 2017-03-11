@@ -4,7 +4,6 @@ import com.artemis.PooledComponent
 
 class Enemy : PooledComponent() {
 
-
     override fun reset() {
 
     }
