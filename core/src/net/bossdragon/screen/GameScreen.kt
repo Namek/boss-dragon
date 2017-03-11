@@ -37,6 +37,7 @@ class GameScreen : WorldScreen() {
                 PositionSystem(),
                 CollisionSystem(),
                 CharacterMapCollisionSystem(),
+                MovementSystem(),// for everything but Player
                 LogicalToGraphicalPositionmentSystem(),
                 PlayerCharacterAnimSystem(),
                 RenderSystem(),

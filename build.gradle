@@ -10,7 +10,7 @@ buildscript {
         artemisContribVersion = "2.1.0"
         artemisOrionVersion = "97a4e4e"
         //box2DLightsVersion = '1.4'
-        //aiVersion = '1.8.0'
+        aiVersion = '1.8.1'
     }
     
     repositories {
@@ -92,7 +92,7 @@ project(":android") {
 //        natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"
 //        natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
 //        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-//        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"
 //        compile "com.badlogicgames.gdx:gdx-bullet:$gdxVersion"
@@ -148,7 +148,7 @@ project(":html") {
         compile "com.badlogicgames.gdx:gdx-controllers-gwt:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-gwt:$gdxVersion:sources"
 //        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion:sources"
-//        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion:sources"
+        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion:sources"
 
         // artemis-odb
         compile "net.onedaybeard.artemis:artemis-odb-gwt:$artemisVersion"
@@ -189,7 +189,7 @@ project(":core") {
         // Optional LibGDX Modules
 //        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
 //        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-//        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
 //        compile "com.badlogicgames.gdx:gdx-bullet:$gdxVersion"
 //        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"

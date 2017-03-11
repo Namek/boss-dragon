@@ -46,14 +46,23 @@ object C {
     }
 
     object Enemy {
-        val MinEnemyCount = 8
-        val SpawnCooldown = 2f
+        val MaxEnemyCount = 8
+        val SpawnCooldown = 1f
 
         /** distance to spawn point */
         val SpawnFlyDistance = Map.LogicalRadius / 2
-        val MaxSpeed = Player.MaxSpeed
+        val MaxSpeed = Player.MaxSpeed/5
         val Friction = Player.Friction
 
+        object AI {
+            /** Time between recalculations about who's going to attack */
+            val StrategyCooldown = 1f
 
+            val PlayerCloseRangeRadius = Assets.Character.ColliderRadius + Assets.Enemy.ColliderRadius
+            val AvoidanceRadius = Assets.Enemy.ColliderRadius * 5 // between each other
+
+            val DistanceWhenWatching = 150f
+            val EnemyCountForStabbingDirectly = 1
+        }
     }
 }

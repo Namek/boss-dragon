@@ -30,10 +30,10 @@ class PositionSystem : EntityProcessingSystem(
 
     private val tmpVector = Vector2()
 
-    override fun process(character: Entity) {
-        val position = pm.get(character)
-        val previousPosition = ppm.get(character)
-        val velocity = vm.get(character)
+    override fun process(entity: Entity) {
+        val position = pm.get(entity)
+        val previousPosition = ppm.get(entity)
+        val velocity = vm.get(entity)
 
         if (previousPosition != null) {
             previousPosition.pos.set(position.currentPos)

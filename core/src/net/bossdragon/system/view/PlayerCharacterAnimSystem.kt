@@ -19,10 +19,10 @@ class PlayerCharacterAnimSystem : EntityProcessingSystem(
     lateinit var mVelocity: M<Velocity>
     lateinit var mPlayer: M<Player>
 
-    override fun process(character: Entity) {
-        val vel = mVelocity[character]
-        val anim = mKeyFramedAnim[character]
-        val player = mPlayer[character]
+    override fun process(entity: Entity) {
+        val vel = mVelocity[entity]
+        val anim = mKeyFramedAnim[entity]
+        val player = mPlayer[entity]
 
         var animName = Animations.StickMan.IDLE
 

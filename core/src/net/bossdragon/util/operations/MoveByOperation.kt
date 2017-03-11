@@ -38,9 +38,13 @@ class MoveByOperation : TemporalOperation() {
 
         override fun act(delta: Float, percent: Float, op: MoveByOperation, node: OperationTree) {
             val transform = positionMapper[op.entityId]
+
             transform.currentPos
                 .set(op.src)
                 .interpolate(op.dest, percent, op.interpolation)
+
+            transform.desiredPos
+                .set(transform.currentPos)
         }
     }
 }

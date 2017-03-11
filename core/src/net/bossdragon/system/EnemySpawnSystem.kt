@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2
 import net.bossdragon.component.Enemy
 import net.bossdragon.component.FightAI
 import net.bossdragon.component.render.Colorized
-import net.bossdragon.component.render.Renderable
 import net.bossdragon.enums.C
 import net.bossdragon.util.operations.funcs.*
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
@@ -17,9 +16,7 @@ import se.feomedia.orion.OperationFactory.*
  *
  */
 class EnemySpawnSystem : IntervalEntitySystem(
-    Aspect
-        .all(Enemy::class.java)
-        .exclude(FightAI::class.java)
+    Aspect.all(Enemy::class.java)
     , C.Enemy.SpawnCooldown
 ) {
     lateinit var mColorized: M<Colorized>
@@ -32,7 +29,7 @@ class EnemySpawnSystem : IntervalEntitySystem(
     private val startPoint = Vector2()
 
     override fun processSystem() {
-        val shouldSpawn = entities.size() < C.Enemy.MinEnemyCount
+        val shouldSpawn = entities.size() < C.Enemy.MaxEnemyCount
 
         if (shouldSpawn) {
             lastSpawnpointIndex++

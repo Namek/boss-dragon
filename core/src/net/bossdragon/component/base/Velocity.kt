@@ -49,6 +49,15 @@ class Velocity : PooledComponent() {
         acceleration.setZero()
     }
 
+    fun setMovement(dirX: Float, dirY: Float, accel: Float) {
+        val isMoving = dirX*dirX + dirY*dirY != 0f
+        frictionOn = !isMoving
+        acceleration.set(dirX, dirY)
+
+        if (isMoving)
+            acceleration.scl(accel)
+    }
+
     fun setMovement(dirX: Int, dirY: Int, accel: Float) {
         val isMoving = dirX + dirY*2 != 0
         frictionOn = !isMoving
@@ -58,8 +67,29 @@ class Velocity : PooledComponent() {
             acceleration.scl(accel)
     }
 
+    fun setMovement(dirX: Float, dirY: Float) {
+        setMovement(dirX, dirY, maxSpeed)
+    }
+
     fun setMovement(dirX: Int, dirY: Int) {
         setMovement(dirX, dirY, maxSpeed)
+    }
+
+    fun setMovement(dir: Vector2) {
+        setMovement(dir.x, dir.y)
+    }
+
+    fun setMovementWithElipson(dirX: Float, dirY: Float, elipson: Float = 0.001f) {
+        val isMoving = Math.abs(dirX*dirX + dirY*dirY) > elipson
+        frictionOn = !isMoving
+        acceleration.set(dirX, dirY)
+
+        if (isMoving)
+            acceleration.scl(maxSpeed)
+    }
+
+    fun setMovementWithElipson(dir: Vector2, elipson: Float = 0.001f) {
+        return setMovementWithElipson(dir.x, dir.y, elipson)
     }
 
     fun setVelocityAtMax(dir: Vector2) {
