@@ -30,10 +30,11 @@ class GameScreen : WorldScreen() {
             .with(
                 OperationSystem(),
                 InputSystem(),
+                EventSystem(),
                 EnemySpawnSystem(),
                 EnemyFightAISystem(),
+                EnemyStateSystem(),
                 CharacterStateSystem(),
-                EventSystem(),
                 PositionSystem(),
                 CollisionSystem(),
                 CharacterMapCollisionSystem(),

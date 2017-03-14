@@ -1,7 +1,6 @@
 package net.bossdragon.system.base.events;
 
 import net.mostlyoriginal.api.event.common.Event;
-import net.mostlyoriginal.api.event.dispatcher.PollingEventDispatcher;
 
 /**
  * Dispatching:

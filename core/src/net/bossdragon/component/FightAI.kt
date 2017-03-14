@@ -1,6 +1,7 @@
 package net.bossdragon.component
 
 import com.artemis.PooledComponent
+import com.artemis.annotations.DelayedComponentRemoval
 import com.badlogic.gdx.ai.steer.behaviors.*
 import com.badlogic.gdx.ai.steer.proximities.RadiusProximity
 import com.badlogic.gdx.math.Vector2
@@ -9,9 +10,9 @@ import net.bossdragon.util.ai.SteerableEntity
 /**
  *
  */
+@DelayedComponentRemoval
 class FightAI : PooledComponent() {
     val steerable = SteerableEntity()
-
     lateinit var steering: BlendedSteering<Vector2>
 
     // blended steering:

@@ -48,6 +48,7 @@ object C {
     object Enemy {
         val MaxEnemyCount = 8
         val SpawnCooldown = 1f
+        val StunCooldown = 3f
 
         /** distance to spawn point */
         val SpawnFlyDistance = Map.LogicalRadius / 2
