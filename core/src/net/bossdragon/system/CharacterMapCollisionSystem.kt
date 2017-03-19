@@ -27,11 +27,11 @@ class CharacterMapCollisionSystem : EntityProcessingSystem(
     val circleChar = Circle()
 
 
-    override fun process(entity: Entity) {
-        val pos = mPosition[entity]
+    override fun process(e: Entity) {
+        val pos = mPosition[e]
         val map = tags.getEntity(Tags.Map)
 
-        collisions.calculateColliderCircle(entity, circleChar, true)
+        collisions.calculateColliderCircle(e, circleChar, true)
         collisions.calculateColliderCircle(map, circleMap)
 
         // is player still inside the map?

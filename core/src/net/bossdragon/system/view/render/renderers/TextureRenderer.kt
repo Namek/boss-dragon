@@ -47,14 +47,14 @@ class TextureRenderer(world: World, private val batch: SpriteBatch) : EntityProc
         val width = size?.width ?: texture.texture!!.regionWidth.toFloat()
         val height = size?.height ?: texture.texture!!.regionHeight.toFloat()
 
-        val originX = if (size != null) size.origin.x * width else 0f
-        val originY = if (size != null) size.origin.y * height else 0f
+        val originX = transform.originX * width
+        val originY = transform.originY * height
         val x = transform.position.x + transform.displacement.x - originX
         val y = transform.position.y + transform.displacement.y - originY
 
         // TODO size?.scale
-        val scaleX = 1f
-        val scaleY = 1f
+        val scaleX = if (transform.flipX) -1f else 1f
+        val scaleY = if (transform.flipY) -1f else 1f
 
         batch.setBlendFunction(texture.blendSrcFunc, texture.blendDestFunc)
 

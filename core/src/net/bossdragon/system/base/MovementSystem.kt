@@ -14,8 +14,8 @@ class MovementSystem : EntityProcessingSystem(
 ) {
     lateinit var mPosition: M<Position>
 
-    override fun process(entity: Entity) {
-        val t = mPosition[entity]
+    override fun process(e: Entity) {
+        val t = mPosition[e]
         t.currentPos.set(t.desiredPos)
     }
 }

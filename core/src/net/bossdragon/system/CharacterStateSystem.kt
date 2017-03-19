@@ -34,9 +34,9 @@ class CharacterStateSystem : EntityProcessingSystem(
     var requestedSlide = false
 
 
-    override fun process(entity: Entity) {
-        val player = mPlayer.get(entity)
-        val velocity = mVelocity.get(entity)
+    override fun process(e: Entity) {
+        val player = mPlayer.get(e)
+        val velocity = mVelocity.get(e)
         val dt = world.getDelta()
 
         var dirX = this.dirX

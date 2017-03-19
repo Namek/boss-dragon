@@ -5,7 +5,7 @@ import com.artemis.PooledComponent
 import com.badlogic.gdx.math.Vector2
 
 /**
- * Graphical position and rotation.
+ * Graphical position, rotation and flip.
  * @see Position
  */
 class Transform : PooledComponent() {
@@ -23,6 +23,15 @@ class Transform : PooledComponent() {
     /** degrees */
     var rotation = 0f
 
+    /** used for [rotation]. range: [0, 1] */
+    var originX = 0.5f
+
+    /** used for [rotation]. range: [0, 1] */
+    var originY = 0.5f
+
+    var flipX = false
+    var flipY = false
+
 
     fun xy(x: Float, y: Float): Transform {
         position.set(x, y)
@@ -31,6 +40,18 @@ class Transform : PooledComponent() {
 
     fun xy(pos: Vector2): Transform {
         position.set(pos)
+        return this
+    }
+
+    fun flip(x: Boolean, y: Boolean): Transform {
+        flipX = x
+        flipY = y
+        return this
+    }
+
+    fun origin(x: Float, y: Float): Transform {
+        originX = x
+        originY = y
         return this
     }
 
@@ -45,4 +66,5 @@ class Transform : PooledComponent() {
             .set(companion.DEFAULT_DIRECTION)
             .rotate(rotation)
     }
+
 }

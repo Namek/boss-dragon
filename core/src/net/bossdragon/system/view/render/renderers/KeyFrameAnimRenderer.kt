@@ -53,18 +53,31 @@ class KeyFrameAnimRenderer(
         var y = 0f
         var w = frames.width
         var h = frames.height
+        var scaleX = 1f
+        var scaleY = 1f
+        var originX = 0f
+        var originY = 0f
+        var rotation = 0f
 
         if (size != null) {
-            w = size.width
-            h = size.height
-            x += -size.origin.x * w
-            y += -size.origin.y * h
+//            w = size.width
+//            h = size.height
         }
 
         if (transform != null) {
             x += transform.position.x + transform.displacement.x
             y += transform.position.y + transform.displacement.y
+            scaleX = if (transform.flipX) -1f else 1f
+            scaleY = if (transform.flipY) -1f else 1f
+            rotation = transform.rotation
+            originX = transform.originX
+            originY = transform.originY
         }
+
+        originX *= w
+        originY *= h
+        x -= originX
+        y -= originY
 
         frames.stateTime += world.getDelta()
 
@@ -75,7 +88,13 @@ class KeyFrameAnimRenderer(
         else
             batch.setColor(oldColor)
 
-        batch.draw(tex, x, y, w, h)
+
+        batch.draw(
+            tex,
+            x, y, originX, originY,
+            w, h,
+            scaleX, scaleY, rotation
+        )
     }
 
     override val type: Int

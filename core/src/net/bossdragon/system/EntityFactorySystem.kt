@@ -85,6 +85,7 @@ class EntityFactorySystem : PassiveSystem() {
 
         // visuals
         e.create(Transform::class.java)
+            .origin(0.5f, 0f)
 
         e.create(Size::class.java)
             .set(Assets.Character.Width.toFloat(), Assets.Character.Height.toFloat())
@@ -175,6 +176,7 @@ class EntityFactorySystem : PassiveSystem() {
 
         e.create(Transform::class.java)
             .xy(0f, 0f)
+            .flipX = true
 
         e.create(Size::class.java)
             .set(C.Map.Width, C.Map.Height)

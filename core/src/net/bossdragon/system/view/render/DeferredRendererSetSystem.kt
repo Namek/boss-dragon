@@ -20,19 +20,19 @@ class DeferredRendererSetSystem : EntityProcessingSystem(
     lateinit internal var renderSystem: RenderBatchingSystem
 
 
-    override fun process(entity: Entity) {
-        val renderable = mRenderable.getSafe(entity, null)
+    override fun process(e: Entity) {
+        val renderable = mRenderable.getSafe(e, null)
 
         val removeInferTag = renderable == null || renderable.type != Renderable.NONE
         val inferRenderer = renderable != null && renderable.type != Renderable.NONE
 
         if (inferRenderer) {
             val renderer = renderSystem.getRendererByType(renderable!!.type)
-            renderSystem.registerAgent(entity, renderer)
+            renderSystem.registerAgent(e, renderer)
         }
 
         if (removeInferTag) {
-            mInferRenderer.remove(entity)
+            mInferRenderer.remove(e)
         }
     }
 
