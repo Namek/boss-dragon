@@ -17,7 +17,7 @@ class AssetSystem : BaseSystem() {
 
 
     lateinit var playerCharacterAnims: KeyFrameAnimationsMap
-    lateinit var enemyAnims: KeyFrameAnimationsMap
+    lateinit var soldierAnims: KeyFrameAnimationsMap
     lateinit var explosionAnim: KeyFrameAnimationsMap
     lateinit var ceilingTex: TextureRegion
     lateinit var fireballTex: TextureRegion
@@ -37,7 +37,7 @@ class AssetSystem : BaseSystem() {
             .add(Animations.StickMan.LYING, 0.5f, 4)
 
         playerCharacterAnims = KeyFrameAnimationsMap.create(animations, frames)
-        enemyAnims = playerCharacterAnims
+        soldierAnims = playerCharacterAnims
 
 
         // explosion

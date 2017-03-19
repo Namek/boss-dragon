@@ -12,7 +12,7 @@ import com.badlogic.gdx.ai.steer.behaviors.BlendedSteering.BehaviorAndWeight
 import com.badlogic.gdx.ai.steer.proximities.RadiusProximity
 import com.badlogic.gdx.ai.utils.Location
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.Enemy
+import net.bossdragon.component.Soldier
 import net.bossdragon.component.FightAI
 import net.bossdragon.component.base.Position
 import net.bossdragon.component.base.Velocity
@@ -30,9 +30,9 @@ import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
  *   * go straight for player character
  *   * if there are at least X other enemies near the player character then don't approach
  */
-class EnemyFightAISystem : EntitySystem(
+class EnemySoldierFightAISystem : EntitySystem(
     Aspect.all(
-        Enemy::class.java,
+        Soldier::class.java,
         FightAI::class.java,
         Position::class.java,
         Velocity::class.java
@@ -81,14 +81,14 @@ class EnemyFightAISystem : EntitySystem(
         // priority #1. player chase
         ai.steering = BlendedSteering(ai.steerable)
 
-        ai.avoidPlayer = FleeWhenClose(ai.steerable, playerEntityLocation, C.Enemy.AI.DistanceWhenWatching)
+        ai.avoidPlayer = FleeWhenClose(ai.steerable, playerEntityLocation, C.Soldier.AI.DistanceWhenWatching)
         ai.steering.add(ai.avoidPlayer, 3f)
 
         ai.seekPlayer = Arrive<Vector2>(ai.steerable, playerEntityLocation)
         ai.steering.add(ai.seekPlayer, 1f)
 
         // priority #2. avoid each other
-        ai.otherEnemyProximity = RadiusProximity<Vector2>(ai.steerable, allSteerableEnemies, C.Enemy.AI.AvoidanceRadius)
+        ai.otherEnemyProximity = RadiusProximity<Vector2>(ai.steerable, allSteerableEnemies, C.Soldier.AI.AvoidanceRadius)
         ai.avoidEachOther = CollisionAvoidance<Vector2>(ai.steerable, ai.otherEnemyProximity)
         ai.steering.add(ai.avoidEachOther, 1f)
 
@@ -120,7 +120,7 @@ class EnemyFightAISystem : EntitySystem(
             aiStrategyCooldown -= world.getDelta()
         }
         else {
-            aiStrategyCooldown = C.Enemy.AI.StrategyCooldown
+            aiStrategyCooldown = C.Soldier.AI.StrategyCooldown
 
             var attackerCount = 0
 
@@ -133,7 +133,7 @@ class EnemyFightAISystem : EntitySystem(
             }
 
             // update attackers only if there are less than a minimum
-            val lackingAttackers = C.Enemy.AI.EnemyCountForStabbingDirectly - attackerCount
+            val lackingAttackers = C.Soldier.AI.EnemyCountForStabbingDirectly - attackerCount
 
             for (i in 0..Math.min(n, lackingAttackers)-1) {
                 val e = entities[i]
@@ -150,7 +150,7 @@ class EnemyFightAISystem : EntitySystem(
             val pos = mPosition[e]
             val vel = mVelocity[e]
 
-            val isInPlayerRange = playerPos.dst(pos.currentPos) < C.Enemy.AI.PlayerCloseRangeRadius
+            val isInPlayerRange = playerPos.dst(pos.currentPos) < C.Soldier.AI.PlayerCloseRangeRadius
 
             ai.steering.calculateSteering(steeringOutput)
             vel.acceleration.set(steeringOutput.linear)

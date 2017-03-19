@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.MathUtils
 import net.bossdragon.component.base.Position
 import net.bossdragon.component.base.Velocity
 import net.bossdragon.enums.C
-import net.bossdragon.events.PlayerCollidesEnemyEvent
+import net.bossdragon.events.PlayerCollidesSoldierEvent
 import net.bossdragon.system.base.collision.CollisionDetectionSystem
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener
 import net.bossdragon.system.base.collision.messaging.CollisionExitListener
@@ -19,9 +19,9 @@ class CollisionSystem : CollisionDetectionSystem(true) {
     lateinit var mVelocity: M<Velocity>
 
     override fun initialize() {
-        relations.connectGroups(CG.CHARACTER, CG.ENEMY or CG.WALL)
-        relations.connectGroups(CG.BURNING_AREA, CG.CHARACTER or CG.ENEMY)
-        relations.connectGroups(CG.FIREBALL, CG.CHARACTER or CG.ENEMY)
+        relations.connectGroups(CG.CHARACTER, CG.SOLDIER or CG.WALL)
+        relations.connectGroups(CG.BURNING_AREA, CG.CHARACTER or CG.SOLDIER)
+        relations.connectGroups(CG.FIREBALL, CG.CHARACTER or CG.SOLDIER)
         relations.connectGroups(CG.BULLET, CG.DRAGON)
     }
 
@@ -44,8 +44,8 @@ class CollisionSystem : CollisionDetectionSystem(true) {
             // TODO
         }
 
-        if (collider.isInGroup(CG.ENEMY)) {
-            events!!.dispatch(PlayerCollidesEnemyEvent::class.java)
+        if (collider.isInGroup(CG.SOLDIER)) {
+            events!!.dispatch(PlayerCollidesSoldierEvent::class.java)
                 .setup(e, other)
         }
     }

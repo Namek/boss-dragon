@@ -3,12 +3,12 @@ package net.bossdragon.system.view
 import com.artemis.Aspect
 import com.artemis.Entity
 import com.artemis.systems.EntityProcessingSystem
-import net.bossdragon.component.Enemy
+import net.bossdragon.component.Soldier
 import net.bossdragon.component.base.Transform
 import net.bossdragon.component.base.Velocity
 import net.bossdragon.component.render.anim.KeyFrameAnimations
 import net.bossdragon.enums.Animations
-import net.bossdragon.events.EnemyPunchedEvent
+import net.bossdragon.events.SoldierPunchedEvent
 import net.bossdragon.events.SoldierGetUpEvent
 import net.bossdragon.events.SoldierPushedToTheFloorEvent
 import net.bossdragon.util.operations.funcs.*
@@ -22,13 +22,13 @@ import se.feomedia.orion.OperationFactory.sequence
  */
 class SoldierCharacterAnimSystem : EntityProcessingSystem(
     Aspect.all(
-        Enemy::class.java,
+        Soldier::class.java,
         Velocity::class.java,
         Transform::class.java,
         KeyFrameAnimations::class.java
     )
 ) {
-    lateinit var mEnemy: M<Enemy>
+    lateinit var mSoldier: M<Soldier>
     lateinit var mVelocity: M<Velocity>
     lateinit var mTransform: M<Transform>
     lateinit var mKeyFramedAnim: M<KeyFrameAnimations>
@@ -36,14 +36,14 @@ class SoldierCharacterAnimSystem : EntityProcessingSystem(
     val LyingAnimAfterDuration = 0.3f
 
     override fun process(e: Entity) {
-        val enemy = mEnemy[e]
+        val soldier = mSoldier[e]
         val vel = mVelocity[e]
         val anim = mKeyFramedAnim[e]
         val trans = mTransform[e]
 
 
-        if (enemy.isLying) {
-            if (enemy.lyingCooldown > LyingAnimAfterDuration) {
+        if (soldier.isLying) {
+            if (soldier.lyingCooldown > LyingAnimAfterDuration) {
                 anim.setAnimation(Animations.StickMan.JUMP)
                 anim.stateTime = 0f
             }

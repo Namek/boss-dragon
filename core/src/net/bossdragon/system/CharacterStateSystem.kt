@@ -6,14 +6,14 @@ import com.artemis.Entity
 import com.artemis.annotations.Wire
 import com.artemis.systems.EntityProcessingSystem
 import com.badlogic.gdx.math.Interpolation
-import net.bossdragon.component.Enemy
+import net.bossdragon.component.Soldier
 import net.bossdragon.component.FightAI
 import net.bossdragon.component.Player
 import net.bossdragon.component.base.Position
 import net.bossdragon.component.base.Velocity
 import net.bossdragon.enums.C
-import net.bossdragon.events.EnemyPunchedEvent
-import net.bossdragon.events.PlayerCollidesEnemyEvent
+import net.bossdragon.events.SoldierPunchedEvent
+import net.bossdragon.events.PlayerCollidesSoldierEvent
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener
 import net.bossdragon.system.base.events.EventSystem
 import net.bossdragon.util.ActionTimer.TimerState.JustStopped
@@ -24,7 +24,7 @@ class CharacterStateSystem : EntityProcessingSystem(
     Aspect.all(Player::class.java, Velocity::class.java)
 ), CollisionEnterListener {
     lateinit internal var mPlayer: ComponentMapper<Player>
-    lateinit internal var mEnemy: ComponentMapper<Enemy>
+    lateinit internal var mSoldier: ComponentMapper<Soldier>
     lateinit internal var mVelocity: ComponentMapper<Velocity>
 
     lateinit internal var events: EventSystem
@@ -88,13 +88,13 @@ class CharacterStateSystem : EntityProcessingSystem(
     }
 
     @Subscribe
-    fun onCollidingEnemy(evt: PlayerCollidesEnemyEvent) {
-        val enemy = mEnemy[evt.enemyEntityId]
+    fun onCollidingEnemySoldier(evt: PlayerCollidesSoldierEvent) {
+        val soldier = mSoldier[evt.soldierEntityId]
         val player = mPlayer[evt.playerEntityId]
 
         if (player.isSliding) {
-            events.dispatch(EnemyPunchedEvent::class.java)
-                .set(evt.enemyEntityId, player.slideDirX)
+            events.dispatch(SoldierPunchedEvent::class.java)
+                .set(evt.soldierEntityId, player.slideDirX)
         }
         else {
             // TODO should be game over

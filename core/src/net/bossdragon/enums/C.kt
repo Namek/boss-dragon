@@ -24,7 +24,7 @@ object C {
         // place those points around map circle
         // assume: map center is placed on (0, 0)
         val SpawnLandPoints = SpawnFlyDirections.map { dir ->
-            Vector2(dir).scl(-(LogicalRadius - Assets.Enemy.ColliderRadius))
+            Vector2(dir).scl(-(LogicalRadius - Assets.Soldier.ColliderRadius))
         }
     }
 
@@ -45,7 +45,7 @@ object C {
         val Size = 60f
     }
 
-    object Enemy {
+    object Soldier {
         val MaxEnemyCount = 8
         val SpawnCooldown = 1f
         val StunCooldown = 3f
@@ -59,8 +59,8 @@ object C {
             /** Time between recalculations about who's going to attack */
             val StrategyCooldown = 1f
 
-            val PlayerCloseRangeRadius = Assets.Character.ColliderRadius + Assets.Enemy.ColliderRadius
-            val AvoidanceRadius = Assets.Enemy.ColliderRadius * 5 // between each other
+            val PlayerCloseRangeRadius = Assets.Character.ColliderRadius + Assets.Soldier.ColliderRadius
+            val AvoidanceRadius = Assets.Soldier.ColliderRadius * 5 // between each other
 
             val DistanceWhenWatching = 150f
             val EnemyCountForStabbingDirectly = 1

@@ -9,7 +9,7 @@ import com.artemis.managers.TagManager
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.Enemy
+import net.bossdragon.component.Soldier
 import net.bossdragon.component.FightAI
 import net.bossdragon.component.Player
 import net.bossdragon.component.base.Position
@@ -93,32 +93,32 @@ class EntityFactorySystem : PassiveSystem() {
     /**
      * Does NOT set up [FightAI] component.
      */
-    fun createEnemy(startPos: Vector2): Entity {
+    fun createSoldierEnemy(startPos: Vector2): Entity {
         val entity = world.createEntity()
         val e = entity.edit()
 
-        tags.register(Tags.Enemy, e.entityId)
+        tags.register(Tags.Soldier, e.entityId)
 
         // logic
-        e.create(Enemy::class.java)
+        e.create(Soldier::class.java)
 
         e.create(Position::class.java)
             .xy(startPos)
 
         e.create(Collider::class.java)
-            .groups(CG.ENEMY)
-            .setCircular(Assets.Enemy.ColliderRadius)
+            .groups(CG.SOLDIER)
+            .setCircular(Assets.Soldier.ColliderRadius)
 
         e.create(Velocity::class.java)
-            .maxSpeed(C.Enemy.MaxSpeed)
-            .friction(C.Enemy.Friction)
+            .maxSpeed(C.Soldier.MaxSpeed)
+            .friction(C.Soldier.Friction)
 
 
         // visuals
         e.create(Transform::class.java)
             .origin(0.5f, 0f)
 
-        setKeyFramesAnim(e, assets.enemyAnims)
+        setKeyFramesAnim(e, assets.soldierAnims)
             .setAnimation(Animations.StickMan.IDLE)
 
         return entity

@@ -4,7 +4,7 @@ import com.artemis.Aspect
 import com.artemis.systems.IntervalEntitySystem
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.Enemy
+import net.bossdragon.component.Soldier
 import net.bossdragon.component.FightAI
 import net.bossdragon.component.render.Colorized
 import net.bossdragon.enums.C
@@ -15,9 +15,9 @@ import se.feomedia.orion.OperationFactory.*
 /**
  *
  */
-class EnemySpawnSystem : IntervalEntitySystem(
-    Aspect.all(Enemy::class.java)
-    , C.Enemy.SpawnCooldown
+class EnemySoldierSpawnSystem : IntervalEntitySystem(
+    Aspect.all(Soldier::class.java)
+    , C.Soldier.SpawnCooldown
 ) {
     lateinit var mColorized: M<Colorized>
     lateinit var mFightAI: M<FightAI>
@@ -29,7 +29,7 @@ class EnemySpawnSystem : IntervalEntitySystem(
     private val startPoint = Vector2()
 
     override fun processSystem() {
-        val shouldSpawn = entities.size() < C.Enemy.MaxEnemyCount
+        val shouldSpawn = entities.size() < C.Soldier.MaxEnemyCount
 
         if (shouldSpawn) {
             lastSpawnpointIndex++
@@ -42,10 +42,10 @@ class EnemySpawnSystem : IntervalEntitySystem(
             val flyDir = C.Map.SpawnFlyDirections[lastSpawnpointIndex]
 
             startPoint.set(flyDir)
-                .scl(-1f * C.Enemy.SpawnFlyDistance)
+                .scl(-1f * C.Soldier.SpawnFlyDistance)
                 .add(landPoint)
 
-            val e = entityFactory.createEnemy(startPoint)
+            val e = entityFactory.createSoldierEnemy(startPoint)
             mColorized.create(e).color.a = 0f
 
             sequence(

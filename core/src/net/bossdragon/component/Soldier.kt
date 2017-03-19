@@ -2,7 +2,7 @@ package net.bossdragon.component
 
 import com.artemis.PooledComponent
 
-class Enemy : PooledComponent() {
+class Soldier : PooledComponent() {
     override fun reset() {
         lyingCooldown = 0f
     }

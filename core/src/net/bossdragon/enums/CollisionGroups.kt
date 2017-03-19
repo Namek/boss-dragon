@@ -2,7 +2,7 @@ package net.bossdragon.enums
 
 object CollisionGroups {
     val CHARACTER: Long = 1
-    val ENEMY = (1 shl 1).toLong()
+    val SOLDIER = (1 shl 1).toLong()
     val BULLET = (1 shl 2).toLong() //made of enemy
     val WALL = (1 shl 3).toLong()
     val DRAGON = (1 shl 4).toLong()

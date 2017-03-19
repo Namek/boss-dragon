@@ -5,7 +5,7 @@ import net.mostlyoriginal.api.event.common.Event
 /**
  *
  */
-class EnemyPunchedEvent : Event {
+class SoldierPunchedEvent : Event {
     var entityId: Int = 0
 
     /** direction of slide: 1 or -1 */
