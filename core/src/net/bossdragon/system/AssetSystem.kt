@@ -33,7 +33,7 @@ class AssetSystem : BaseSystem() {
             .add(Animations.StickMan.WALK_RIGHT, 0.12f, 0)
             .add(Animations.StickMan.WALK_LEFT, 0.12f, 1)
             .add(Animations.StickMan.IDLE, 0.5f, 2)
-            .add(Animations.StickMan.JUMP, 0.5f, 3)
+            .add(Animations.StickMan.JUMP, 0.07f, 3)
             .add(Animations.StickMan.LYING, 0.5f, 4)
 
         playerCharacterAnims = KeyFrameAnimationsMap.create(animations, frames)
