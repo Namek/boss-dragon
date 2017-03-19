@@ -8,4 +8,7 @@ class Enemy : PooledComponent() {
     }
 
     var lyingCooldown: Float = 0f
+
+    val isLying: Boolean
+        get() = lyingCooldown > 0f
 }

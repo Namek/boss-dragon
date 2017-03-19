@@ -9,6 +9,7 @@ import net.bossdragon.system.base.PositionSystem
 import net.bossdragon.system.base.collision.CollisionDebugSystem
 import net.bossdragon.system.base.events.EventSystem
 import net.bossdragon.system.view.PlayerCharacterAnimSystem
+import net.bossdragon.system.view.SoldierCharacterAnimSystem
 import net.bossdragon.system.view.render.DeferredRendererSetSystem
 import net.bossdragon.system.view.render.RenderSystem
 import net.bossdragon.system.view.render.debug.CollisionScaledDebugSystem
@@ -41,6 +42,7 @@ class GameScreen : WorldScreen() {
                 MovementSystem(),// for everything but Player
                 LogicalToGraphicalPositionmentSystem(),
                 PlayerCharacterAnimSystem(),
+                SoldierCharacterAnimSystem(),
                 RenderSystem(),
                 CollisionScaledDebugSystem()
             )

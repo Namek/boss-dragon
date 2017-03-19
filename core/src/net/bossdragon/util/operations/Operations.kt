@@ -10,16 +10,16 @@ import se.feomedia.orion.OperationFactory.configure
 import se.feomedia.orion.OperationFactory.operation
 
 
-fun moveBy(destination: Vector2, duration: Float, interpolation: Interpolation = Interpolation.linear): MoveByOperation {
+fun moveBy(vec: Vector2, duration: Float, interpolation: Interpolation = Interpolation.linear): MoveByOperation {
     val op = operation(MoveByOperation::class.java)
     configure(op, duration, interpolation)
-    op.dest.set(destination)
+    op.dest.set(vec)
 
     return op
 }
 
-fun moveBy(destination: Vector2): MoveByOperation {
-    return moveBy(destination, 0f, Interpolation.linear)
+fun moveBy(vec: Vector2): MoveByOperation {
+    return moveBy(vec, 0f, Interpolation.linear)
 }
 
 fun moveTo(destination: Vector2, duration: Float, interpolation: Interpolation = Interpolation.linear): MoveToOperation {
@@ -66,8 +66,20 @@ fun displaceBy(translation: Vector2, duration: Float, interpolation: Interpolati
     return op
 }
 
+fun displaceBy(x: Float, y: Float, duration: Float, interpolation: Interpolation = Interpolation.linear): DisplaceByOperation {
+    val op = operation(DisplaceByOperation::class.java)
+    configure(op, duration, interpolation)
+    op.dest.set(x, y)
+
+    return op
+}
+
 fun displaceBy(translation: Vector2): DisplaceByOperation {
     return displaceBy(translation, 0f, Interpolation.linear)
+}
+
+fun displaceBy(x: Float, y: Float): DisplaceByOperation {
+    return displaceBy(x, y, 0f, Interpolation.linear)
 }
 
 fun displaceTo(destination: Vector2, duration: Float, interpolation: Interpolation = Interpolation.linear): DisplaceToOperation {

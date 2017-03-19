@@ -94,7 +94,7 @@ class CharacterStateSystem : EntityProcessingSystem(
 
         if (player.isSliding) {
             events.dispatch(EnemyPunchedEvent::class.java)
-                .entityId = evt.enemyEntityId
+                .set(evt.enemyEntityId, player.slideDirX)
         }
         else {
             // TODO should be game over
