@@ -1,5 +1,7 @@
 package net.bossdragon.util.collections;
 
+import com.badlogic.gwtref.client.ReflectionCache;
+
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.AbstractList;
@@ -527,7 +529,7 @@ public class SortedList<T> extends AbstractList<T> implements Serializable {
 		// if it's not big enough to the elements make a new array of the same type..
 		if (holder.length < size) {
 			Class<?> classOfE = holder.getClass().getComponentType();
-			holder = (E[]) Array.newInstance(classOfE, size);
+			holder = (E[]) ReflectionCache.newArray(classOfE, size);
 		}
 		// populate the array..
 		Iterator<T> itr = iterator();

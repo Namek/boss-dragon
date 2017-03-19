@@ -4,7 +4,7 @@ buildscript {
         appVersion = '0.1-SNAPSHOT'
 
         kotlinVersion = '1.1.0'
-        gdxVersion = '1.9.5'
+        gdxVersion = '1.9.6'
         roboVMVersion = '2.2.0'
         artemisVersion = '2.1.0'
         artemisContribVersion = "2.1.0"
@@ -158,9 +158,14 @@ project(":html") {
         compile "net.onedaybeard.artemis:artemis-odb-serializer-json-libgdx:$artemisVersion:sources"
 
         // Artemis-odb bonus functionality (systems, events, components).
-        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-core:$artemisContribVersion:sources"
-        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-eventbus:$artemisContribVersion:sources"
-        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-jam:$artemisContribVersion:sources"
+        compile "com.github.Namek.artemis-odb-contrib:contrib-core:master---fork-master-SNAPSHOT:sources"
+        compile "com.github.Namek.artemis-odb-contrib:contrib-eventbus:master---fork-master-SNAPSHOT:sources"
+        compile "com.github.Namek.artemis-odb-contrib:contrib-jam:master---fork-master-SNAPSHOT:sources"
+        compile "com.github.Namek.artemis-odb-contrib:contrib-plugin-operations:master---fork-master-SNAPSHOT:sources"
+//        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-core:$artemisContribVersion:sources"
+//        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-eventbus:$artemisContribVersion:sources"
+//        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-jam:$artemisContribVersion:sources"
+//        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-plugin-operations:$artemisContribVersion:sources"
 //        compile "net.mostlyoriginal.artemis-odb:contrib-core:$artemisContribVersion:sources"
 //        compile "net.mostlyoriginal.artemis-odb:contrib-jam:$artemisContribVersion:sources"
 //        compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:$artemisContribVersion:sources"
@@ -185,6 +190,7 @@ project(":core") {
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
 
         // Optional LibGDX Modules
 //        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
@@ -203,9 +209,12 @@ project(":core") {
 //        compile "net.mostlyoriginal.artemis-odb:contrib-jam:$artemisContribVersion"
 //        compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:$artemisContribVersion"
 //        compile "net.mostlyoriginal.artemis-odb:contrib-plugin-operations:$artemisContribVersion"
-        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-core:$artemisContribVersion"
-        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-eventbus:$artemisContribVersion"
-        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-jam:$artemisContribVersion"
+//        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-core:$artemisContribVersion"
+//        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-eventbus:$artemisContribVersion"
+//        compile "com.github.DaanVanYperen.artemis-odb-contrib:contrib-jam:$artemisContribVersion"
+        compile 'com.github.Namek.artemis-odb-contrib:contrib-core:master---fork-master-SNAPSHOT'
+        compile 'com.github.Namek.artemis-odb-contrib:contrib-eventbus:master---fork-master-SNAPSHOT'
+        compile 'com.github.Namek.artemis-odb-contrib:contrib-jam:master---fork-master-SNAPSHOT'
 
         // artemis-odb-orion: Action API - tweens, animations, sequential/parallel operations
         compile "com.github.Namek:artemis-odb-orion:$artemisOrionVersion"
