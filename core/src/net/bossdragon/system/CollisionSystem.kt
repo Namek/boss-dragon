@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.MathUtils
 import net.bossdragon.component.base.Position
 import net.bossdragon.component.base.Velocity
 import net.bossdragon.enums.C
-import net.bossdragon.events.PlayerCollidesSoldierEvent
+import net.bossdragon.events.OnPlayerCollidesSoldier
 import net.bossdragon.system.base.collision.CollisionDetectionSystem
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener
 import net.bossdragon.system.base.collision.messaging.CollisionExitListener
@@ -45,7 +45,7 @@ class CollisionSystem : CollisionDetectionSystem(true) {
         }
 
         if (collider.isInGroup(CG.SOLDIER)) {
-            events!!.dispatch(PlayerCollidesSoldierEvent::class.java)
+            events!!.dispatch(OnPlayerCollidesSoldier::class.java)
                 .setup(e, other)
         }
     }

@@ -4,6 +4,7 @@ import com.artemis.World
 import com.artemis.WorldConfigurationBuilder
 import com.artemis.managers.TagManager
 import net.bossdragon.system.*
+import net.bossdragon.system.base.AttachmentSystem
 import net.bossdragon.system.base.MovementSystem
 import net.bossdragon.system.base.PositionSystem
 import net.bossdragon.system.base.collision.CollisionDebugSystem
@@ -36,6 +37,7 @@ class GameScreen : WorldScreen() {
                 EnemySoldierFightAISystem(),
                 EnemySoldierStateSystem(),
                 CharacterStateSystem(),
+                AttachmentSystem(),
                 PositionSystem(),
                 CollisionSystem(),
                 CharacterMapCollisionSystem(),

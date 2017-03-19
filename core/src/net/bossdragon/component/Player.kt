@@ -12,9 +12,14 @@ class Player : Component() {
     var slideDirX = 0
     var slideDirY = 0
 
+    var carriedSoldierId: Int = -1
+
     val isSliding: Boolean
         get() = slide.isRunning
 
     val canStartSlide: Boolean
         get() = !isSliding && !slideCooldown.isRunning
+
+    val isCarryingAnySoldier: Boolean
+        get() = carriedSoldierId >= 0
 }

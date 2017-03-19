@@ -4,7 +4,7 @@ import net.mostlyoriginal.api.event.common.Event
 /**
  *
  */
-class PlayerCollidesSoldierEvent : Event {
+class OnPlayerCollidesSoldier : Event {
     var playerEntityId: Int = 0
     var soldierEntityId: Int = 0
 

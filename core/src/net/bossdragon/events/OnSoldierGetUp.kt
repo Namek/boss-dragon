@@ -5,6 +5,6 @@ import net.mostlyoriginal.api.event.common.Event
 /**
  *
  */
-class SoldierGetUpEvent : Event {
+class OnSoldierGetUp : Event {
     var entityId: Int = 0
 }

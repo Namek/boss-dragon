@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2
 import net.bossdragon.component.Soldier
 import net.bossdragon.component.FightAI
 import net.bossdragon.component.Player
+import net.bossdragon.component.base.Attached
 import net.bossdragon.component.base.Position
 import net.bossdragon.component.base.Transform
 import net.bossdragon.component.base.Velocity
@@ -25,6 +26,7 @@ import net.bossdragon.enums.Tags
 import net.bossdragon.system.base.collision.Collider
 import net.bossdragon.system.view.render.RenderSystem
 import net.bossdragon.system.view.render.anim.KeyFrameAnimationsMap
+import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 import net.mostlyoriginal.api.system.core.PassiveSystem
 import net.bossdragon.enums.CollisionGroups as CG
 
@@ -33,6 +35,10 @@ class EntityFactorySystem : PassiveSystem() {
     lateinit internal var assets: AssetSystem
     lateinit internal var renderSystem: RenderSystem
     lateinit internal var tags: TagManager
+
+    lateinit internal var mPosition: M<Position>
+    lateinit internal var mVelocity: M<Velocity>
+    lateinit internal var mCollider: M<Collider>
 
 
     internal var fireballArchetype: Archetype? = null

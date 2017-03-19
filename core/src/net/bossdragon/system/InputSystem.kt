@@ -62,7 +62,7 @@ class InputSystem : BaseSystem() {
         val controller = this.controller
         if (controller != null) {
             if (controller.getButton(BUTTON_A)) {
-                characterSystem.requestedSlide = true
+                characterSystem.requestedSlideOrThrow = true
             }
 
             val x = controller.getAxis(AXIS_LEFT_X)
@@ -87,7 +87,7 @@ class InputSystem : BaseSystem() {
             characterSystem.dirY = 0
 
         if (input.isKeyJustPressed(Keys.SPACE))
-            characterSystem.requestedSlide = true
+            characterSystem.requestedSlideOrThrow = true
 
 
         // TODO just a test, to be removed

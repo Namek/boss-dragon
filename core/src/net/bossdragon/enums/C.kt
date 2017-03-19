@@ -65,5 +65,8 @@ object C {
             val DistanceWhenWatching = 150f
             val EnemyCountForStabbingDirectly = 1
         }
+
+        val MaxSpeedWhenThrown = Player.MaxSpeed * 5
+        val AccelWhenThrown = MaxSpeedWhenThrown * 12
     }
 }

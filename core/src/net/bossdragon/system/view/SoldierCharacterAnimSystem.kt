@@ -8,9 +8,8 @@ import net.bossdragon.component.base.Transform
 import net.bossdragon.component.base.Velocity
 import net.bossdragon.component.render.anim.KeyFrameAnimations
 import net.bossdragon.enums.Animations
-import net.bossdragon.events.SoldierPunchedEvent
-import net.bossdragon.events.SoldierGetUpEvent
-import net.bossdragon.events.SoldierPushedToTheFloorEvent
+import net.bossdragon.enums.Assets
+import net.bossdragon.events.*
 import net.bossdragon.util.operations.funcs.*
 import net.mostlyoriginal.api.event.common.Subscribe
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
@@ -69,7 +68,7 @@ class SoldierCharacterAnimSystem : EntityProcessingSystem(
     }
 
     @Subscribe
-    fun onSoldierPushedOnTheFloor(evt: SoldierPushedToTheFloorEvent) {
+    fun onSoldierPushedOnTheFloor(evt: OnSoldierPushedToTheFloor) {
         sequence(
             parallel(
                 // jump up/down
@@ -86,8 +85,23 @@ class SoldierCharacterAnimSystem : EntityProcessingSystem(
     }
 
     @Subscribe
-    fun onSoldierGetUp(evt: SoldierGetUpEvent) {
+    fun onSoldierGetUp(evt: OnSoldierGetUp) {
         // rotate him back
         mTransform[evt.entityId].rotation = 0f
+    }
+
+    @Subscribe
+    fun onPlayerLiftsSoldierEvent(evt: OnPlayerLiftsSoldier) {
+        val trans = mTransform[evt.soldierId]
+        trans.rotation = 90f
+        trans.displacement.x = Assets.Soldier.Width.toFloat()/2
+
+        val anim = mKeyFramedAnim[evt.soldierId]
+        anim.setAnimation(Animations.StickMan.JUMP)
+    }
+
+    @Subscribe
+    fun onPlayerThrowsSoldierEvent(evt: DoThrowSoldierAction) {
+        // TODO ?
     }
 }
