@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Rectangle
 import net.bossdragon.component.base.Position
-import net.bossdragon.component.base.Size
 import net.bossdragon.system.base.collision.messaging.CollisionEvent
 import net.bossdragon.system.base.events.EventSystem
 import java.util.*
@@ -28,14 +27,12 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
 ) : EntitySystem(
     Aspect.all(
         Collider::class.java,
-        Position::class.java,
-        Size::class.java
+        Position::class.java
     )
 ) {
 
     lateinit protected var mCollider: ComponentMapper<Collider>
     lateinit protected var mPosition: ComponentMapper<Position>
-    lateinit protected var mSize: ComponentMapper<Size>
 
     protected var events: EventSystem? = null
 
@@ -107,23 +104,21 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
     fun checkOverlap(entity1Id: Int, collider1: Collider, entity2Id: Int, collider2: Collider): Boolean {
         val pos1 = mPosition.get(entity1Id)
         val pos2 = mPosition.get(entity2Id)
-        val size1 = mSize.get(entity1Id)
-        val size2 = mSize.get(entity2Id)
 
         when (collider1.colliderShape) {
             ColliderShape.RECT -> {
-                setColliderRect(collider1, pos1, size1, rect1, true)
+                setColliderRect(collider1, pos1, rect1, true)
             }
             ColliderShape.CIRCLE -> {
-                setColliderCircle(collider1, pos1, size1, circle1, true)
+                setColliderCircle(collider1, pos1, circle1, true)
             }
         }
         when (collider2.colliderShape) {
             ColliderShape.RECT -> {
-                setColliderRect(collider2, pos2, size2, rect2, true)
+                setColliderRect(collider2, pos2, rect2, true)
             }
             ColliderShape.CIRCLE -> {
-                setColliderCircle(collider2, pos2, size2, circle2, true)
+                setColliderCircle(collider2, pos2, circle2, true)
             }
         }
 
@@ -149,84 +144,28 @@ open class CollisionDetectionSystem @JvmOverloads constructor(
 
     internal fun calculateColliderRect(e: Entity, outRect: Rectangle, desiredPos: Boolean = false): Collider {
         val collider = mCollider[e]
-        setColliderRect(collider, mPosition[e], mSize[e], outRect, desiredPos)
+        setColliderRect(collider, mPosition[e], outRect, desiredPos)
         return collider
     }
 
-    private inline fun setColliderRect(collider: Collider, pos: Position, size: Size, outRect: Rectangle, desiredPos: Boolean) {
-        when (collider.spatialSizeCalc) {
-            Collider.SpatialCalculation.BasedOnSizeComponent -> {
-                outRect.setSize(size.width, size.height)
-            }
-            Collider.SpatialCalculation.Constant -> {
-                outRect.setSize(collider.spatialSize.x, collider.spatialSize.y)
-            }
-            Collider.SpatialCalculation.Scale -> {
-                outRect.setSize(
-                    collider.spatialSize.x * size.width,
-                    collider.spatialSize.y * size.height
-                )
-            }
-        }
-
+    private inline fun setColliderRect(collider: Collider, pos: Position, outRect: Rectangle, desiredPos: Boolean) {
+        outRect.setSize(collider.spatialSize.x, collider.spatialSize.y)
         outRect.setPosition(if (desiredPos) pos.desiredPos else pos.currentPos)
-
-        when (collider.spatialPosCalc) {
-            Collider.SpatialCalculation.BasedOnSizeComponent -> {
-                outRect.x -= (size.origin.x * outRect.width)
-                outRect.y -= (size.origin.y * outRect.height)
-            }
-            Collider.SpatialCalculation.Constant -> {
-                outRect.x += collider.spatialPos.x
-                outRect.y += collider.spatialPos.y
-            }
-            Collider.SpatialCalculation.Scale -> {
-                outRect.x -= (collider.spatialPos.x * size.width)
-                outRect.y -= (collider.spatialPos.y * size.height)
-            }
-        }
+        outRect.x += collider.spatialPos.x
+        outRect.y += collider.spatialPos.y
     }
 
     internal fun calculateColliderCircle(e: Entity, outCircle: Circle, desiredPos: Boolean = false): Collider {
         val collider = mCollider[e]
-        setColliderCircle(collider, mPosition[e], mSize[e], outCircle, desiredPos)
+        setColliderCircle(collider, mPosition[e], outCircle, desiredPos)
         return collider
     }
 
-    private inline fun setColliderCircle(collider: Collider, pos: Position, size: Size, outCircle: Circle, desiredPos: Boolean) {
-        var radius = 0f
-
-        when (collider.spatialSizeCalc) {
-            Collider.SpatialCalculation.BasedOnSizeComponent -> {
-                radius = size.width / 2
-            }
-            Collider.SpatialCalculation.Constant -> {
-                radius = collider.spatialSize.x / 2
-            }
-            Collider.SpatialCalculation.Scale -> {
-                radius = collider.spatialSize.x * size.width / 2
-            }
-        }
-        outCircle.setRadius(radius)
-
+    private inline fun setColliderCircle(collider: Collider, pos: Position, outCircle: Circle, desiredPos: Boolean) {
+        outCircle.setRadius(collider.spatialSize.x / 2)
         outCircle.setPosition(if (desiredPos) pos.desiredPos else pos.currentPos)
-        outCircle.x += radius/2
-        outCircle.y += radius/2
-
-        when (collider.spatialPosCalc) {
-            Collider.SpatialCalculation.BasedOnSizeComponent -> {
-                outCircle.x -= (size.origin.x * radius)
-                outCircle.y -= (size.origin.y * radius)
-            }
-            Collider.SpatialCalculation.Constant -> {
-                outCircle.x += collider.spatialPos.x
-                outCircle.y += collider.spatialPos.y
-            }
-            Collider.SpatialCalculation.Scale -> {
-                outCircle.x -= (collider.spatialPos.x * radius)
-                outCircle.y -= (collider.spatialPos.y * radius)
-            }
-        }
+        outCircle.x += collider.spatialPos.x
+        outCircle.y += collider.spatialPos.y
     }
 
     override fun removed(entity: Entity) {

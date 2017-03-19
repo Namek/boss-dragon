@@ -13,7 +13,6 @@ import net.bossdragon.component.Enemy
 import net.bossdragon.component.FightAI
 import net.bossdragon.component.Player
 import net.bossdragon.component.base.Position
-import net.bossdragon.component.base.Size
 import net.bossdragon.component.base.Transform
 import net.bossdragon.component.base.Velocity
 import net.bossdragon.component.render.Renderable
@@ -43,7 +42,6 @@ class EntityFactorySystem : PassiveSystem() {
     override fun initialize() {
         renderableArchetype = ArchetypeBuilder()
             .add(Transform::class.java)
-            .add(Size::class.java)
             .add(Renderable::class.java)
             .build(world)
     }
@@ -87,10 +85,6 @@ class EntityFactorySystem : PassiveSystem() {
         e.create(Transform::class.java)
             .origin(0.5f, 0f)
 
-        e.create(Size::class.java)
-            .set(Assets.Character.Width.toFloat(), Assets.Character.Height.toFloat())
-            .origin(0.5f, 0f)
-
         setKeyFramesAnim(e, assets.playerCharacterAnims)
 
         return entity
@@ -122,9 +116,6 @@ class EntityFactorySystem : PassiveSystem() {
 
         // visuals
         e.create(Transform::class.java)
-
-        e.create(Size::class.java)
-            .set(Assets.Enemy.Width.toFloat(), Assets.Enemy.Height.toFloat())
             .origin(0.5f, 0f)
 
         setKeyFramesAnim(e, assets.enemyAnims)
@@ -139,6 +130,7 @@ class EntityFactorySystem : PassiveSystem() {
 
         e.create(Transform::class.java)
             .xy(pos)
+            .origin(0.5f, 0.5f)
 
         e.create(Position::class.java)
             .xy(pos)
@@ -148,10 +140,6 @@ class EntityFactorySystem : PassiveSystem() {
             .setVelocityAtMax(dir)
 
         setTexture(e, assets.fireballTex)
-
-        e.create(Size::class.java)
-            .set(C.Fireball.Size, C.Fireball.Size)
-            .origin(0.5f, 0.5f)
 
         e.create(Collider::class.java)
             .groups(CG.FIREBALL)
@@ -176,11 +164,8 @@ class EntityFactorySystem : PassiveSystem() {
 
         e.create(Transform::class.java)
             .xy(0f, 0f)
-            .flipX = true
-
-        e.create(Size::class.java)
-            .set(C.Map.Width, C.Map.Height)
             .origin(0.5f, 0.5f)
+            .flipX = true
 
         setTexture(e, assets.playgroundTex)
 

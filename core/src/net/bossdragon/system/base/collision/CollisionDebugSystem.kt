@@ -9,15 +9,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Rectangle
 import net.bossdragon.component.base.Position
-import net.bossdragon.component.base.Size
 import net.bossdragon.system.view.render.RenderSystem
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 
 open class CollisionDebugSystem : EntitySystem(
     Aspect.all(
         Collider::class.java,
-        Position::class.java,
-        Size::class.java
+        Position::class.java
     ))
 {
     lateinit var mCollider: M<Collider>

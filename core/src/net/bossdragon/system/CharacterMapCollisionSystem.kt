@@ -7,7 +7,6 @@ import com.artemis.systems.EntityProcessingSystem
 import com.badlogic.gdx.math.Circle
 import net.bossdragon.component.Player
 import net.bossdragon.component.base.Position
-import net.bossdragon.component.base.Size
 import net.bossdragon.enums.Tags
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 
@@ -18,7 +17,6 @@ class CharacterMapCollisionSystem : EntityProcessingSystem(
     Aspect.all(Player::class.java)
 ) {
     lateinit var mPosition: M<Position>
-    lateinit var mSize: M<Size>
 
     lateinit var tags: TagManager
     lateinit var collisions: CollisionSystem
