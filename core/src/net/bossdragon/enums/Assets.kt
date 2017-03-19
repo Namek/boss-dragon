@@ -4,7 +4,7 @@ object Assets {
     object Character {
         val Width = 64
         val Height = 64
-        val ColliderRadius = 15f
+        val ColliderRadius = 25f
     }
 
     object Enemy {
