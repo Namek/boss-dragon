@@ -5,10 +5,6 @@ import com.artemis.Entity
 import com.artemis.World
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import net.bossdragon.component.base.Transform
-import net.bossdragon.component.render.Colorized
-import net.bossdragon.component.render.Renderable
-import net.bossdragon.component.render.TextureComponent
 import net.bossdragon.system.view.render.RenderBatchingSystem.EntityProcessAgent
 
 class TextureRenderer(world: World, private val batch: SpriteBatch) : EntityProcessAgent {

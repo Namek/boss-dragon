@@ -3,12 +3,6 @@ package net.bossdragon.system.view
 import com.artemis.Aspect
 import com.artemis.Entity
 import com.artemis.systems.EntityProcessingSystem
-import net.bossdragon.component.Soldier
-import net.bossdragon.component.base.Transform
-import net.bossdragon.component.base.Velocity
-import net.bossdragon.component.render.anim.KeyFrameAnimations
-import net.bossdragon.enums.Animations
-import net.bossdragon.enums.Assets
 import net.bossdragon.events.*
 import net.bossdragon.util.operations.funcs.*
 import net.mostlyoriginal.api.event.common.Subscribe

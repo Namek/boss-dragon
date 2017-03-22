@@ -3,9 +3,6 @@ package net.bossdragon.system
 import com.artemis.BaseSystem
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureRegion
-import net.bossdragon.enums.Animations
-import net.bossdragon.enums.Assets
-import net.bossdragon.enums.C
 import net.bossdragon.system.view.render.anim.KeyFrameAnimationsMap
 import net.bossdragon.util.collections.tuples.TripleList
 

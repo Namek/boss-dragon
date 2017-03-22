@@ -3,16 +3,6 @@ package net.bossdragon.system
 import com.artemis.Aspect
 import com.artemis.Entity
 import com.artemis.systems.EntityProcessingSystem
-import net.bossdragon.component.Soldier
-import net.bossdragon.component.FightAI
-import net.bossdragon.component.base.Attached
-import net.bossdragon.component.base.Velocity
-import net.bossdragon.enums.C
-import net.bossdragon.enums.CollisionGroups
-import net.bossdragon.events.DoThrowSoldierAction
-import net.bossdragon.events.OnSoldierPunched
-import net.bossdragon.events.OnSoldierGetUp
-import net.bossdragon.events.OnSoldierPushedToTheFloor
 import net.bossdragon.system.base.collision.Collider
 import net.bossdragon.system.base.events.EventSystem
 import net.mostlyoriginal.api.event.common.Subscribe

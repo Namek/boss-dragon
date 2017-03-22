@@ -4,8 +4,6 @@ import com.artemis.Aspect
 import com.artemis.Entity
 import com.artemis.systems.EntityProcessingSystem
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.base.Attached
-import net.bossdragon.component.base.Position
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 
 /**

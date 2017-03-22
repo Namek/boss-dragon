@@ -1,7 +1,6 @@
 package net.bossdragon.system.view.render
 
 import net.bossdragon.component.render.InferRenderer
-import net.bossdragon.component.render.Renderable
 import net.bossdragon.system.view.render.RenderBatchingSystem.EntityProcessAgent
 
 import com.artemis.Aspect

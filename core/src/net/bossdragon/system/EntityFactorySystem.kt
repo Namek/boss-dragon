@@ -9,26 +9,12 @@ import com.artemis.managers.TagManager
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.Soldier
-import net.bossdragon.component.FightAI
-import net.bossdragon.component.Player
-import net.bossdragon.component.base.Attached
-import net.bossdragon.component.base.Position
-import net.bossdragon.component.base.Transform
-import net.bossdragon.component.base.Velocity
-import net.bossdragon.component.render.Renderable
-import net.bossdragon.component.render.TextureComponent
-import net.bossdragon.component.render.anim.KeyFrameAnimations
-import net.bossdragon.enums.Animations
-import net.bossdragon.enums.Assets
-import net.bossdragon.enums.C
 import net.bossdragon.enums.Tags
 import net.bossdragon.system.base.collision.Collider
 import net.bossdragon.system.view.render.RenderSystem
 import net.bossdragon.system.view.render.anim.KeyFrameAnimationsMap
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 import net.mostlyoriginal.api.system.core.PassiveSystem
-import net.bossdragon.enums.CollisionGroups as CG
 
 @Wire
 class EntityFactorySystem : PassiveSystem() {

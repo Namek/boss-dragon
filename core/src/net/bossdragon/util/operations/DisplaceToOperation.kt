@@ -3,7 +3,6 @@ package net.bossdragon.util.operations
 import com.artemis.ComponentMapper
 import com.artemis.annotations.Wire
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.base.Transform
 import se.feomedia.orion.Executor
 import se.feomedia.orion.Operation
 import se.feomedia.orion.OperationTree

@@ -6,10 +6,6 @@ import com.artemis.World
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
-import net.bossdragon.component.base.Transform
-import net.bossdragon.component.render.Renderable
-import net.bossdragon.component.render.Colorized
-import net.bossdragon.component.render.anim.KeyFrameAnimations
 import net.bossdragon.system.view.render.RenderBatchingSystem
 
 class KeyFrameAnimRenderer(

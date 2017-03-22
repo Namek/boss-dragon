@@ -6,10 +6,6 @@ import com.artemis.Entity
 import com.artemis.annotations.Wire
 import com.artemis.systems.EntityProcessingSystem
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.base.Attached
-import net.bossdragon.component.base.Position
-import net.bossdragon.component.base.PreviousPosition
-import net.bossdragon.component.base.Velocity
 
 
 /**

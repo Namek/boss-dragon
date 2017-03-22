@@ -5,11 +5,6 @@ import com.artemis.Entity
 import com.artemis.systems.EntityProcessingSystem
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
-import net.bossdragon.component.Player
-import net.bossdragon.component.base.Transform
-import net.bossdragon.component.base.Velocity
-import net.bossdragon.component.render.anim.KeyFrameAnimations
-import net.bossdragon.enums.Animations
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 
 /**

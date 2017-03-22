@@ -12,17 +12,9 @@ import com.badlogic.gdx.ai.steer.behaviors.BlendedSteering.BehaviorAndWeight
 import com.badlogic.gdx.ai.steer.proximities.RadiusProximity
 import com.badlogic.gdx.ai.utils.Location
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.Soldier
-import net.bossdragon.component.FightAI
-import net.bossdragon.component.base.Position
-import net.bossdragon.component.base.Velocity
-import net.bossdragon.enums.Assets
-import net.bossdragon.enums.C
 import net.bossdragon.enums.Tags
 import net.bossdragon.util.ai.BlendedSteering
 import net.bossdragon.util.ai.LocationableEntity
-import net.bossdragon.util.ai.SteerableEntity
-import net.bossdragon.util.ai.behaviors.FleeWhenClose
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 
 /**

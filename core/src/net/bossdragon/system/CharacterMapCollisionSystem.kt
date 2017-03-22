@@ -5,8 +5,6 @@ import com.artemis.Entity
 import com.artemis.managers.TagManager
 import com.artemis.systems.EntityProcessingSystem
 import com.badlogic.gdx.math.Circle
-import net.bossdragon.component.Player
-import net.bossdragon.component.base.Position
 import net.bossdragon.enums.Tags
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 

@@ -9,7 +9,6 @@ import com.artemis.utils.IntBag
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Rectangle
-import net.bossdragon.component.base.Position
 import net.bossdragon.system.base.collision.messaging.CollisionEvent
 import net.bossdragon.system.base.events.EventSystem
 import java.util.*

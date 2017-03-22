@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Rectangle
-import net.bossdragon.component.base.Position
 import net.bossdragon.system.view.render.RenderSystem
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
 

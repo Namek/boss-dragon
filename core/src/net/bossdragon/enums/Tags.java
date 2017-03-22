@@ -1,7 +1,7 @@
 package net.bossdragon.enums;
 
 public interface Tags {
-	public static final String Player = "player";
-	public static final String Map = "map";
-	public static final String Soldier = "soldier";
+	String Player = "player";
+	String Map = "map";
+	String Soldier = "soldier";
 }

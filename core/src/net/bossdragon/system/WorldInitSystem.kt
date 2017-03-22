@@ -4,7 +4,6 @@ package net.bossdragon.system
 import com.artemis.BaseSystem
 import com.artemis.annotations.Wire
 import net.bossdragon.system.view.render.RenderSystem
-import net.bossdragon.enums.CollisionGroups as CG
 
 @Wire
 class WorldInitSystem : BaseSystem() {

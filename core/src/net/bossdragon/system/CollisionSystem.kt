@@ -3,17 +3,13 @@ package net.bossdragon.system
 import com.artemis.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
-import net.bossdragon.component.base.Position
 import net.bossdragon.component.base.Velocity
-import net.bossdragon.enums.C
-import net.bossdragon.events.OnPlayerCollidesSoldier
 import net.bossdragon.system.base.collision.CollisionDetectionSystem
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener
 import net.bossdragon.system.base.collision.messaging.CollisionExitListener
 import net.bossdragon.util.operations.funcs.*
 import se.feomedia.orion.OperationFactory.*
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
-import net.bossdragon.enums.CollisionGroups as CG
 
 class CollisionSystem : CollisionDetectionSystem(true) {
     lateinit var mVelocity: M<Velocity>

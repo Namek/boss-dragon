@@ -7,7 +7,6 @@ package net.bossdragon.system.view.render
  */
 
 import net.bossdragon.component.render.InferRenderer
-import net.bossdragon.component.render.Renderable
 import net.mostlyoriginal.api.utils.BagUtils
 
 import com.artemis.BaseSystem

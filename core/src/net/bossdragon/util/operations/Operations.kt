@@ -10,27 +10,27 @@ import se.feomedia.orion.OperationFactory.configure
 import se.feomedia.orion.OperationFactory.operation
 
 
-fun moveBy(vec: Vector2, duration: Float, interpolation: Interpolation = Interpolation.linear): MoveByOperation {
-    val op = operation(MoveByOperation::class.java)
+fun moveBy(vec: Vector2, duration: Float, interpolation: Interpolation = Interpolation.linear): MoveByOp {
+    val op = operation(MoveByOp::class.java)
     configure(op, duration, interpolation)
     op.dest.set(vec)
 
     return op
 }
 
-fun moveBy(vec: Vector2): MoveByOperation {
+fun moveBy(vec: Vector2): MoveByOp {
     return moveBy(vec, 0f, Interpolation.linear)
 }
 
-fun moveTo(destination: Vector2, duration: Float, interpolation: Interpolation = Interpolation.linear): MoveToOperation {
-    val op = operation(MoveToOperation::class.java)
+fun moveTo(destination: Vector2, duration: Float, interpolation: Interpolation = Interpolation.linear): MoveToOp {
+    val op = operation(MoveToOp::class.java)
     configure(op, duration, interpolation)
     op.dest.set(destination)
 
     return op
 }
 
-fun moveTo(destination: Vector2): MoveToOperation {
+fun moveTo(destination: Vector2): MoveToOp {
     return moveTo(destination, 0f, Interpolation.linear)
 }
 

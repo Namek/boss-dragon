@@ -6,25 +6,12 @@ import com.artemis.Entity
 import com.artemis.annotations.Wire
 import com.artemis.systems.EntityProcessingSystem
 import com.badlogic.gdx.math.Interpolation
-import net.bossdragon.component.Soldier
-import net.bossdragon.component.FightAI
-import net.bossdragon.component.Player
-import net.bossdragon.component.base.Attached
-import net.bossdragon.component.base.Position
-import net.bossdragon.component.base.Velocity
-import net.bossdragon.enums.Assets
-import net.bossdragon.enums.C
-import net.bossdragon.events.OnSoldierPunched
-import net.bossdragon.events.OnPlayerCollidesSoldier
-import net.bossdragon.events.OnPlayerLiftsSoldier
-import net.bossdragon.events.DoThrowSoldierAction
 import net.bossdragon.system.base.collision.Collider
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener
 import net.bossdragon.system.base.events.EventSystem
 import net.bossdragon.util.ActionTimer.TimerState.JustStopped
 import net.mostlyoriginal.api.event.common.Subscribe
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M
-import net.bossdragon.enums.CollisionGroups as CG
 
 @Wire
 class CharacterStateSystem : EntityProcessingSystem(

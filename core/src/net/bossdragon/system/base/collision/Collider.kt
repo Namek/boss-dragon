@@ -2,7 +2,6 @@ package net.bossdragon.system.base.collision
 
 import com.artemis.PooledComponent
 import com.badlogic.gdx.math.Vector2
-import net.bossdragon.component.base.Transform
 import net.bossdragon.system.base.collision.messaging.CollisionEnterListener
 import net.bossdragon.system.base.collision.messaging.CollisionExitListener
 

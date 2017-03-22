@@ -2,8 +2,6 @@ package net.bossdragon.util.operations
 
 import com.artemis.ComponentMapper
 import com.artemis.annotations.Wire
-import net.bossdragon.component.render.Colorized
-import net.bossdragon.component.render.Renderable
 import se.feomedia.orion.Executor
 import se.feomedia.orion.Operation
 import se.feomedia.orion.OperationTree

@@ -1,7 +1,6 @@
 package net.bossdragon.system.view.render.debug
 
 import com.artemis.Entity
-import net.bossdragon.enums.C
 import net.bossdragon.system.base.collision.ColliderShape
 import net.bossdragon.system.base.collision.CollisionDebugSystem
 

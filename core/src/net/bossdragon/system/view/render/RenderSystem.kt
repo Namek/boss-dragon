@@ -8,9 +8,6 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import net.bossdragon.component.Player
-import net.bossdragon.component.base.Transform
-import net.bossdragon.component.render.Renderable
 import net.bossdragon.enums.Tags
 import net.bossdragon.system.view.render.renderers.KeyFrameAnimRenderer
 import net.bossdragon.system.view.render.renderers.TextureRenderer
