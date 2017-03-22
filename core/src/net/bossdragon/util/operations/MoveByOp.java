@@ -13,8 +13,8 @@ import se.feomedia.orion.operation.TemporalOperation;
  * Translation over {@link Position#currentPos}.
  */
 public class MoveByOp extends TemporalOperation {
-    final Vector2 src = new Vector2();
-    final Vector2 dst = new Vector2();
+    public final Vector2 src = new Vector2();
+    public final Vector2 dst = new Vector2();
 
     @Override
     public Class<? extends Executor> executorType() {

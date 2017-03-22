@@ -11,10 +11,10 @@ public class Transform extends PooledComponent {
     public static final Vector2 DEFAULT_DIRECTION = new Vector2(0f, 1f);
 
     /** Current position to render. It's directly transformed from [Position] component. */
-    Vector2 position = new Vector2();
+    public Vector2 position = new Vector2();
 
     /** Additional displacement to position. Usually used for graphics puroses, like head bobbing. */
-    Vector2 displacement = new Vector2();
+    public Vector2 displacement = new Vector2();
 
     /** degrees */
     public float rotation = 0f;
@@ -25,8 +25,8 @@ public class Transform extends PooledComponent {
     /** used for [rotation]. range: [0, 1] */
     public float originY = 0.5f;
 
-    boolean flipX = false;
-    boolean flipY = false;
+    public boolean flipX = false;
+    public boolean flipY = false;
 
 
     public Transform xy(float x, float y) {
