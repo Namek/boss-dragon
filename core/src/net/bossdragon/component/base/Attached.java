@@ -1,12 +1,13 @@
 package net.bossdragon.component.base;
 
+import com.artemis.PooledComponent;
 import com.badlogic.gdx.math.Vector2;
 import net.bossdragon.system.base.AttachmentSystem;
 
 /**
  * @see AttachmentSystem
  */
-public class Attached {
+public class Attached extends PooledComponent {
     public int entityId = -1;
     public final Vector2 displace = new Vector2();
 
