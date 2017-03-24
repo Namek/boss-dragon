@@ -11,15 +11,13 @@ import net.bossdragon.component.base.Position;
 import net.bossdragon.system.view.render.RenderSystem;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 
-/**
- *
- */
-public class CollisionDebugSystem extends EntityProcessingSystem {
-    M<Collider> mCollider;
 
-    CollisionDetectionSystem collisions;
-    RenderSystem renderSystem;
-    ShapeRenderer shapes;
+public class CollisionDebugSystem extends EntityProcessingSystem {
+    protected M<Collider> mCollider;
+
+    protected CollisionDetectionSystem collisions;
+    protected RenderSystem renderSystem;
+    protected ShapeRenderer shapes;
 
     protected final Rectangle rect = new Rectangle();
     protected final Circle circle = new Circle();
@@ -27,7 +25,7 @@ public class CollisionDebugSystem extends EntityProcessingSystem {
     public final Color defaultColor = Color.PINK.cpy();
 
 
-    CollisionDebugSystem() {
+    public CollisionDebugSystem() {
         super(Aspect.all(Collider.class, Position.class));
     }
 

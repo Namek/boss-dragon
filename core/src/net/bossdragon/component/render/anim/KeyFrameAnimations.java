@@ -13,9 +13,9 @@ public class KeyFrameAnimations extends PooledComponent {
     public Animation<?> currentAnimation = null;
 
     public KeyFrameAnimationsMap animations = null;
-    float width = 0;
-    float height = 0;
-    float stateTime = 0;
+    public float width = 0;
+    public float height = 0;
+    public float stateTime = 0;
 
     @Override
     protected void reset() {

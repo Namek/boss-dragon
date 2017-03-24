@@ -142,13 +142,13 @@ public class CollisionDetectionSystem extends EntitySystem {
         return overlaps;
     }
 
-    Collider calculateColliderRect(Entity e, Rectangle outRect, boolean desiredPos) {
+    public Collider calculateColliderRect(Entity e, Rectangle outRect, boolean desiredPos) {
         Collider collider = mCollider.get(e);
         setColliderRect(collider, mPosition.get(e), outRect, desiredPos);
         return collider;
     }
 
-    Collider calculateColliderRect(Entity e, Rectangle outRect) {
+    public Collider calculateColliderRect(Entity e, Rectangle outRect) {
         return calculateColliderRect(e, outRect, false);
     }
 
@@ -159,13 +159,13 @@ public class CollisionDetectionSystem extends EntitySystem {
         outRect.y += collider.spatialPos.y;
     }
 
-    Collider calculateColliderCircle(Entity e, Circle outCircle, boolean desiredPos) {
+    public Collider calculateColliderCircle(Entity e, Circle outCircle, boolean desiredPos) {
         Collider collider = mCollider.get(e);
         setColliderCircle(collider, mPosition.get(e), outCircle, desiredPos);
         return collider;
     }
 
-    Collider calculateColliderCircle(Entity e, Circle outCircle) {
+    public Collider calculateColliderCircle(Entity e, Circle outCircle) {
         return calculateColliderCircle(e, outCircle, false);
     }
 
